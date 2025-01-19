@@ -1,1 +1,1 @@
-# sleepwave-2-dev
+# Sleepwave 2 (dev)
