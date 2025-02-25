@@ -88,14 +88,14 @@ export const ENVIRONMENTS = [
               duration: 6000,
             },
           },
-          /* {
+          {
             name: 'Distant crowd',
             type: 'Background',
             audio_file: {
               src: 'distant-crowd.mp3',
               duration: 770000,
             },
-          }, */
+          },
         ],
       },
       // Vehicles ========================================================

@@ -142,6 +142,7 @@ export const logAppInfos = (appName, appVersion) => {
 
 
   const unavailable = '%cunavailable';
+  const available = '%cavailable';
 
   const appNameStyle = `
     font-size: 24px;
@@ -157,7 +158,7 @@ export const logAppInfos = (appName, appVersion) => {
   console.log(`Environment: %c${getCurrentEnv()}`, `font-size: 16px; ${basicValueStyle}`);
 
   console.groupCollapsed('App status');
-    console.log(`Storage: ${unavailable}`, negativeValueStyle);
+    console.log(`Storage: ${available}`, positiveValueStyle);
   console.groupEnd();
 }
 

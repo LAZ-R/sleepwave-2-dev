@@ -62,9 +62,9 @@ const setBaseSliders = () => {
       muted: false,
       absolute_volume: 100,
       relative_max_volume: sound.type == 'Background' ? null : 100,
-      relative_min_volume: sound.type == 'Background' ? null : 75,
-      repetition_frequency: sound.type == 'Background' ? null : 10,
-      skip_frequency: sound.type == 'Background' ? null : 50,
+      relative_min_volume: sound.type == 'Background' ? null : 100,
+      repetition_frequency: sound.type == 'Background' ? null : 100,
+      skip_frequency: sound.type == 'Background' ? null : 0,
     })
   }
 
