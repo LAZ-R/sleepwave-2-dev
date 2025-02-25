@@ -8,7 +8,8 @@
   /* COLORS */
   /* ####################################################################### */
 
-  --nostromo-green: hsl(100, 61%, 50%);
+  --nostromo-green:     hsl(100, 60%, 50%);
+  --nostromo-green-off: hsl(100, 60%, 15%);
 
   /* ======================================================= */
   /* RAW COLORS */
@@ -27,7 +28,7 @@
   --color--bg-35:  hsl(0, 0%, 35%);
   --color--bg-40:  hsl(0, 0%, 40%);
   --color--bg-45:  hsl(0, 0%, 45%);
-  --color--bg-50:  hsl(0, 0%, 50%);
+  --color--bg-50: /*  hsl(0, 0%, 50%); */ var(--nostromo-green-off);
   --color--bg-55:  hsl(0, 0%, 55%);
   --color--bg-60:  hsl(0, 0%, 60%);
   --color--bg-65:  hsl(0, 0%, 65%);
@@ -50,7 +51,7 @@
   --color--fg-35:  hsl(0, 0%, 65%);
   --color--fg-40:  hsl(0, 0%, 60%);
   --color--fg-45:  hsl(0, 0%, 55%);
-  --color--fg-50:  hsl(0, 0%, 50%);
+  --color--fg-50:  /* hsl(0, 0%, 50%); */ var(--nostromo-green-off);
   --color--fg-55:  hsl(0, 0%, 45%);
   --color--fg-60:  hsl(0, 0%, 40%);
   --color--fg-65:  hsl(0, 0%, 35%);

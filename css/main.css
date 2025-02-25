@@ -85,8 +85,7 @@ button {
   border-radius: var(--border-radius--button);
   -webkit-tap-highlight-color: transparent;
 
-  
-  animation: textShadow 1.6s infinite;
+  /* animation: textShadow 1.6s infinite; */
 
   font-family: 'consolas';
   font-size: 16px;
@@ -96,6 +95,7 @@ button {
   }
 
   &.solid {
+    border: 1px solid var(--color--fg-0);
     background-color: var(--color--bg-100);
     color: var(--color--fg-100);
 
@@ -406,13 +406,13 @@ html, body {
       } */
       
     &:has(.mute-button.active) {
-      border: 1px dotted var(--color--fg-0);
+      border: 1px dotted var(--color--fg-50);
       border-right: none;
       border-bottom: none;
 
       .connection {
         border-left: 1px solid var(--color--fg-0);
-        border-bottom: 1px dotted var(--color--fg-0);
+        border-bottom: 1px solid var(--color--fg-0);
       }
       .dot {
         background-color: var(--color--bg-25);
@@ -424,22 +424,19 @@ html, body {
         color: var(--color--fg-50);
       }
       .sound-type-icon {
-        opacity: .35;
-        filter: none;
+        /* opacity: .35; */
+        filter: brightness(0) saturate(100%) invert(15%) sepia(96%) saturate(439%) hue-rotate(55deg) brightness(90%) contrast(90%);
       }
       .buttons-group {
-        button {
+
+        .solid {
           border: 1px solid var(--color--fg-50);
-          color: var(--color--fg-50);
-        }
+          background-color: var(--color--fg-50);
   
-        .mute-button {
-          &.active {
-            /* border: 1px solid orange;
-            color: orange;
-            opacity: .5; */
+          &:active {
             border: 1px solid var(--color--fg-50);
             color: var(--color--fg-50);
+            background-color: transparent;
           }
         }
       }
@@ -482,13 +479,17 @@ html, body {
       button {
         padding: 0 4px;
         margin: 0;
-        border: 1px solid var(--color--fg-0);
       }
 
       .mute-button {
+        border: 1px solid var(--color--fg-0);
+        color: var(--color--fg-100);
+        background-color: var(--color--bg-100);
+
         &.active {
-          border: 1px solid orange;
-          color: orange;
+          border: 1px solid var(--color--fg-50);
+          color: var(--color--fg-50);
+          background-color: transparent;
         }
       }
     }
@@ -681,5 +682,5 @@ html, body {
   pointer-events: none;
 }
 .crt {
-  animation: textShadow 1.6s infinite;
+  /* animation: textShadow 1.6s infinite; */
 }

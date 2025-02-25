@@ -112,7 +112,14 @@ export const getFullTimeStringFromMilliseconds = (milliseconds = 0) => {
   const hoursStr = `${timeObj.hours == 0 ? '00' : timeObj.hours < 10 ? `0${timeObj.hours}` : timeObj.hours}h`;
   const minutesStr = `${timeObj.minutes == 0 ? '00' : timeObj.minutes < 10 ? `0${timeObj.minutes}` : timeObj.minutes}m`;
   const secondsStr = `${timeObj.seconds == 0 ? '00' : timeObj.seconds < 10 ? `0${timeObj.seconds}` : timeObj.seconds}s`;
-  const millisecondsStr = `${timeObj.milliseconds == 0 ? '000' : timeObj.milliseconds < 10 ? `00${timeObj.milliseconds}` : timeObj.milliseconds < 100 ? `0${timeObj.milliseconds}` : timeObj.milliseconds}ms`;
+  const millisecondsStr = `${
+    timeObj.milliseconds == 0 
+    ? '000' 
+    : timeObj.milliseconds < 10 
+      ? `00${roundToDecimals(Number(timeObj.milliseconds), 0)}` 
+      : timeObj.milliseconds < 100 
+        ? `0${roundToDecimals(Number(timeObj.milliseconds), 0)}` 
+        : roundToDecimals(Number(timeObj.milliseconds), 0)}ms`;
   return `${hoursStr} ${minutesStr} ${secondsStr} ${millisecondsStr}`;
 }
 

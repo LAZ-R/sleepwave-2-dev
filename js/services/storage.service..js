@@ -38,6 +38,20 @@ export const getSoundBase = () => {
   return soundBase;
 }
 
+export const getEnvironmentSoundBase = (envName) => {
+  const soundBase = [];
+  for (let environment of ENVIRONMENTS) {
+    if (environment.name === envName) {
+      for (let category of environment.categories) {
+        for (let sound of category.sounds) {
+          soundBase.push(sound);
+        }
+      }
+    }
+  }
+  return soundBase;
+}
+
 const setBaseSliders = () => {
   const soundBase =  getSoundBase();
 
