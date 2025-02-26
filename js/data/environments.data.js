@@ -27,7 +27,7 @@ export const ENVIRONMENTS = [
             type: 'Background',
             audio_file: {
               src: 'outdoor-wind.mp3',
-              duration: 169000,
+              duration: 158000,
             },
           },
         ],
@@ -67,16 +67,20 @@ export const ENVIRONMENTS = [
             ],
           },
           {
-            name: 'Police 01',
+            name: 'Police patrol',
             type: 'Events pack',
             audio_files_pack: [
               {
                 src: 'police-01.mp3',
-                duration: 20000,
+                duration: 21000,
               },
               {
                 src: 'police-02.mp3',
                 duration: 15000,
+              },
+              {
+                src: 'police-03.mp3',
+                duration: 21000,
               },
             ],
           },
@@ -139,7 +143,15 @@ export const ENVIRONMENTS = [
             type: 'Event',
             audio_file:{
               src: 'spaceship-04.mp3',
-              duration: 17000,
+              duration: 14000,
+            },
+          },
+          {
+            name: 'Spaceship 05',
+            type: 'Event',
+            audio_file:{
+              src: 'spaceship-05.mp3',
+              duration: 15000,
             },
           },
         ],

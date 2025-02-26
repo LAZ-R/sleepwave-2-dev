@@ -522,6 +522,10 @@ const playBackgroundSoundsArray = () => {
 }
 
 const playEventsPackRandomAudio = (audioList) => {
+  const baseColor = 'color: #FFFFFF;';
+  const basicValueStyle = 'color: #5CD2F8;';
+  const neutralValueStyle = 'color: #BBBBBB;';
+
   if (audioList.length === 0) return;
 
   const randomAudio = audioList[getRandomIntegerBetween(0, audioList.length - 1)];
@@ -534,9 +538,13 @@ const playEventsPackRandomAudio = (audioList) => {
       let minAbsoluteValue = roundToDecimals((slider.relative_min_volume / 100) * slider.absolute_volume, 2);
       let maxAbsoluteValue = roundToDecimals((slider.relative_max_volume / 100) * slider.absolute_volume, 2);
       let randomVolume = roundToDecimals(getRandomIntegerBetween(minAbsoluteValue, maxAbsoluteValue) / 100, 2);
-      console.log(`playing ${randomAudio.src} @ ${randomVolume * 100}%`);
       randomAudio.audio.volume = randomVolume;
       randomAudio.audio.play();
+      if (slider.muted) {
+        console.log(`%cplaying ${randomAudio.src} @ ${roundToDecimals(randomVolume * 100, 0)}%`, neutralValueStyle);
+      } else {
+        console.log(`playing %c${randomAudio.src} %c@ %c${roundToDecimals(randomVolume * 100, 0)}%`, basicValueStyle, baseColor, basicValueStyle);
+      }
     } 
   } else {
     //console.log('Skipped');
@@ -544,6 +552,10 @@ const playEventsPackRandomAudio = (audioList) => {
 }
 
 const playEventAudio = (soundName) => {
+  const baseColor = 'color: #FFFFFF;';
+  const basicValueStyle = 'color: #5CD2F8;';
+  const neutralValueStyle = 'color: #BBBBBB;';
+
   const audio = PLAYING_AUDIO_ARRAY.find(e => e.name === soundName);
   let slider = getUserSliderBySoundName(audio.name);
   //console.log(slider);
@@ -554,9 +566,13 @@ const playEventAudio = (soundName) => {
       let minAbsoluteValue = roundToDecimals((slider.relative_min_volume / 100) * slider.absolute_volume, 2);
       let maxAbsoluteValue = roundToDecimals((slider.relative_max_volume / 100) * slider.absolute_volume, 2);
       let randomVolume = roundToDecimals(getRandomIntegerBetween(minAbsoluteValue, maxAbsoluteValue) / 100, 2);
-      console.log(`playing ${audio.src} @ ${randomVolume * 100}%`);
       audio.audio.volume = randomVolume;
       audio.audio.play();
+      if (slider.muted) {
+        console.log(`%cplaying ${audio.src} @ ${roundToDecimals(randomVolume * 100, 0)}%`, neutralValueStyle);
+      } else {
+        console.log(`playing %c${audio.src} %c@ %c${roundToDecimals(randomVolume * 100, 0)}%`, basicValueStyle, baseColor, basicValueStyle);
+      }
     } 
   } else {
     //console.log('Skipped');
