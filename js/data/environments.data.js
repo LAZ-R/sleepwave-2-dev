@@ -158,4 +158,12 @@ export const ENVIRONMENTS = [
       },
     ]
   },
+  /* {
+    name: 'Mountain Cabin',
+    categories: []
+  },
+  {
+    name: 'Dinotopia\'s Waterfall City',
+    categories: []
+  }, */
 ];

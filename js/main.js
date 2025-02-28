@@ -15,7 +15,7 @@ let PLAYING_AUDIO_ARRAY = [];
 let environmentEventsArray = [];
 let environmentEventsPacksArray = [];
 
-HEADER.innerHTML = `<p>SLEEPWAVE 2 (dev) v ${APP_VERSION}</p>`;
+HEADER.innerHTML = `<!-- <img style="height: 32px; margin-right: 8px" src="./medias/app-maskable-icons/app_icon_144.png" /> --><p>SLEEPWAVE 2 (dev) v ${APP_VERSION}</p>`;
 
 /* ########################################################### */
 /* FUNCTIONS */
@@ -247,10 +247,11 @@ const getSliderBySrc = (src) => {
 // IHM ////////////////////////////////////////////////////
 
 const setHomepage = () => {
-  let str = '';
+  let str = '<div class="homepage-container"><!--<img class="main-logo" src="./medias/app-maskable-icons/app_icon_512.png" />-->';
   for (let environment of ENVIRONMENTS) {
     str += `<button class="solid env-button" onclick="onEnvButtonClick('${environment.name}')">${environment.name}</button>`;
   }
+  str += '</div>';
   MAIN.innerHTML = str;
 }
 

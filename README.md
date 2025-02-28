@@ -1,4 +1,4 @@
-# SLEEPWAVE V2 (dev v0.0.4)
+# SLEEPWAVE V2 (dev v0.0.5)
 
 Virtual soundscape generator
 
