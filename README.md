@@ -1,6 +1,6 @@
-# SLEEPWAVE V2 (dev v0.0.5)
+# SLEEPWAVE 2 (dev v0.0.6)
 
-Virtual soundscape generator
+**[Virtual soundscape generator](https://laz-r.github.io/sleepwave-2-dev/)**
 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)

@@ -2,7 +2,7 @@
 <html lang="fr" id="html">
   <head>
     <meta charset="utf-8">
-    <title id="title">Sleepwave 2 (dev)</title>
+    <title id="title"></title>
     <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="./css/main.css">
     <link id="favicon" rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -25,6 +25,14 @@
 
     <main id="main"></main>
     <section id="editPage" class="floating-edit-page disabled"></section>
+    <section id="consolePage" class="floating-console-page disabled">
+      <div class="console-header">
+        <span>logs</span>
+        <button class="" onclick="onCloseConsoleClick()">X</button>
+      </div>
+      <div id="consoleContent" class="console-content">
+      </div>
+    </section>
 
     <!-- <footer id="footer"></footer> -->
   </body>

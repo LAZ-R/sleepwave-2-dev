@@ -5,23 +5,17 @@ import { getEnvironmentSoundBase, getSoundBase, getUser, setStorage, setUser } f
 import { showToast } from "./services/toast.service.js";
 import { convertMillisecondsToTime, convertTimeToMilliseconds, getCompactTimeString, getFullTimeString, getFullTimeStringFromMilliseconds, getRandomIntegerBetween, logAppInfos, roundToDecimals, setHTMLTitle } from "./utils/UTILS.js";
 
-/* ########################################################### */
-/* VARIABLES */
-/* ########################################################### */
+// VARIABLES //////////////////////////////////////////////////////////////////////////////////////
 const HEADER = document.getElementById('header');
 const MAIN = document.getElementById('main');
 
 let PLAYING_AUDIO_ARRAY = [];
-let environmentEventsArray = [];
-let environmentEventsPacksArray = [];
+let eventsBankArray = [];
+let eventsPacksBankArray = [];
 
-HEADER.innerHTML = `<!-- <img style="height: 32px; margin-right: 8px" src="./medias/app-maskable-icons/app_icon_144.png" /> --><p>SLEEPWAVE 2 (dev) v ${APP_VERSION}</p>`;
+// FUNCTIONS //////////////////////////////////////////////////////////////////////////////////////
 
-/* ########################################################### */
-/* FUNCTIONS */
-/* ########################################################### */
-
-// USER INTERACTIONS //////////////////////////////////////
+// USER INTERACTIONS ##########################################################
 
 // HOMEPAGE ===============================================
 const onEnvButtonClick = (envName) => {
@@ -35,6 +29,41 @@ const onEnvButtonClick = (envName) => {
 window.onEnvButtonClick = onEnvButtonClick;
 
 // ENVIRONMENT SCREEN =====================================
+
+// Header -------------------------------------------------
+const onHomeClick = () => {
+  for (let soundFile of PLAYING_AUDIO_ARRAY) {
+    //console.log(soundFile);
+    soundFile.audio.pause();
+  }
+  for (let event of eventsBankArray) {
+    //console.log(event);
+    event.bank.stop();
+  }
+  for (let eventsPack of eventsPacksBankArray) {
+    //console.log(eventsPack);
+    eventsPack.bank.stop();
+  }
+  PLAYING_AUDIO_ARRAY = [];
+  eventsBankArray = [];
+  eventsPacksBankArray = [];
+
+  setHomepage();
+}
+window.onHomeClick = onHomeClick;
+
+const onConsoleButtonClick = () => {
+  document.getElementById('consolePage').classList.remove('disabled');
+}
+window.onConsoleButtonClick = onConsoleButtonClick;
+
+// Console ------------------------------------------------
+const onCloseConsoleClick = () => {
+  document.getElementById('consolePage').classList.add('disabled');
+}
+window.onCloseConsoleClick = onCloseConsoleClick;
+
+// Sound blocs --------------------------------------------
 const onMuteButtonClick = (soundName) => {
   //console.log(soundName);
   let button = document.getElementById(`${soundName}MuteButton`);
@@ -167,13 +196,13 @@ const onRepetitionFrequencySliderInput = (soundName) => {
   }
   setUser(user);
 
-  for (let event of environmentEventsArray) {
+  for (let event of eventsBankArray) {
     if (event.name === soundName) {
       event.bank.updateDelay(value);
     }
   }
 
-  for (let eventPack of environmentEventsPacksArray) {
+  for (let eventPack of eventsPacksBankArray) {
     if (eventPack.name === soundName) {
       eventPack.bank.updateDelay(value);
     }
@@ -205,7 +234,8 @@ const onCloseDetailsClick = () => {
 }
 window.onCloseDetailsClick = onCloseDetailsClick;
 
-// DATA ///////////////////////////////////////////////////
+// DATA #######################################################################
+
 const getSoundByName = (soundName) => {
   const soundBase =  getSoundBase();
 
@@ -227,27 +257,14 @@ const getUserSliderBySoundName = (soundName) => {
   return null;
 }
 
-const getSliderBySrc = (src) => {
-  let soundBase = getSoundBase();
-  let user = getUser();
+// IHM RENDER #################################################################
 
-  for (let sound of soundBase) {
-    if (sound.audio_file?.src === src) {
-      console.log(sound.audio_file.src)
-      for (let slider of user.sliders) {
-        if (slider.name === sound.name) {
-          return slider;
-        }
-      }
-    }
-  }
-  return null;
-}
-
-// IHM ////////////////////////////////////////////////////
+// HOMEPAGE ===============================================
 
 const setHomepage = () => {
-  let str = '<div class="homepage-container"><!--<img class="main-logo" src="./medias/app-maskable-icons/app_icon_512.png" />-->';
+  setHTMLTitle(APP_NAME)
+  renderHomepageHeader();
+  let str = '<div class="homepage-container">';
   for (let environment of ENVIRONMENTS) {
     str += `<button class="solid env-button" onclick="onEnvButtonClick('${environment.name}')">${environment.name}</button>`;
   }
@@ -255,10 +272,26 @@ const setHomepage = () => {
   MAIN.innerHTML = str;
 }
 
+const renderHomepageHeader = () => {
+  HEADER.innerHTML = `<p style="margin: 0 auto;">SLEEPWAVE 2 (dev) v ${APP_VERSION}</p>`;
+}
 // ENVIRONMENT SCREEN =====================================
+
 const setEnvPage = (environment) => {
-  MAIN.innerHTML = getEnvironmentIhm(environment);
+  setHTMLTitle(environment.name);
+  document.getElementById('consoleContent').innerHTML = '';
+
+  renderEnvironmentHeader(environment);
+  MAIN.innerHTML = getEnvironmentCategoryBlocs(environment);
   createEnvironmentPlayingAudioArray(environment.name);
+}
+
+const renderEnvironmentHeader = (environment) => {
+  HEADER.innerHTML = `
+    <button class="home-button" onclick="onHomeClick()"><img class="main-logo" src="./medias/images/logo.png" /></button>
+    <p>${environment.name}</p>
+    <!-- <button class="logs-button" onclick="onConsoleButtonClick()"></button> -->
+    <button class="outlined" onclick="onConsoleButtonClick()">logs</button>`;
 }
 
 const getSoundBloc = (sound) => {
@@ -266,8 +299,8 @@ const getSoundBloc = (sound) => {
 
   return `
     <div class="sound-bloc">
-      <span class="connection"></span>
-      <!--<span class="dot"></span>-->
+      <span class="connection1"></span>
+      <span class="connection2"></span>
       <span class="sound-name">${sound.name}</span>
       <img class="sound-type-icon" src="./medias/images/${sound.type == 'Background' ? 'background' : sound.type == 'Event' ? 'event' : 'events-pack' }.png"/>
       <div class="buttons-group">
@@ -296,18 +329,16 @@ const getCategoryBloc = (category) => {
   `;
 }
 
-const getEnvironmentIhm = (environment) => {
+const getEnvironmentCategoryBlocs = (environment) => {
   let categoryBlocsStr = '';
   for (let category of environment.categories) {
     categoryBlocsStr += getCategoryBloc(category);
   }
 
-  return `
-    <span class="environment-header">Neo Tōkyō Penthouse</span>
-    ${categoryBlocsStr}
-  `;
+  return `${categoryBlocsStr}`;
 }
 // SOUND DETAILS SCREEN ===================================
+
 const getSoundDetailsScreen = (sound) => {
   document.querySelector(':root').style.setProperty('--min-value', `0%`);
   document.querySelector(':root').style.setProperty('--max-value', `0%`);
@@ -347,10 +378,16 @@ const getSoundDetailsScreen = (sound) => {
 
       <span class="section-title">Volume</span>
       ${sound.type == 'Background' ? '' : `
-        <div class="space-between-line"><span><!--🛈 -->Effective volume range</span><span id="effectiveRangeValue">75%-85%</span></div>
+        <div class="space-between-line" style="margin-bottom: 8px;">
+          <span style="display: flex; justify-content: flex-start; align-items: center">
+            <img src="./medias/images/info.png" style="filter: var(--primary-filter); height: 16px; margin-right: 8px;" />
+            <span>Effective volume range</span>
+          </span>
+          <span id="effectiveRangeValue">75%-85%</span>
+        </div>
       `}
 
-      <button class="solid">Play at max range</button>
+      <!-- <button class="solid">Play at max range</button> -->
 
       <div class="slider-container">
         <div class="space-between-line"><span>${sound.type == 'Background' ? 'Volume' : 'Absolute volume'}</span><span id="absoluteVolumeValue">${slider.absolute_volume}%</span></div>
@@ -370,7 +407,20 @@ const getSoundDetailsScreen = (sound) => {
         <hr>
   
         <span class="section-title">Frequency</span>
-        <div class="space-between-line"><span><!--🛈 --><span id="infoSkipFrequencyValue">${100 - slider.skip_frequency}%</span> chance to be played every<br><span id="realDelayValue">${getFullTimeStringFromMilliseconds(getRealDelay(slider.repetition_frequency, longestDuration))}</span></span></div>
+
+        <div class="space-between-line" style="margin-bottom: 8px;">
+          <span style="display: flex; justify-content: flex-start; align-items: center">
+            <img src="./medias/images/info.png" style="filter: var(--primary-filter); height: 16px; margin-right: 8px;" />
+            <span>
+              <span>
+                <span id="infoSkipFrequencyValue">${100 - slider.skip_frequency}%</span> chance to be played every
+              </span>
+              <br>
+              <span id="realDelayValue">${getFullTimeStringFromMilliseconds(getRealDelay(slider.repetition_frequency, longestDuration))}</span>
+            </span>
+            
+          </span>
+        </div>
         <div class="slider-container">
           <span></span>
           <div class="space-between-line"><span>Repetition frequency</span><span id="repetitionFrequencyValue">${slider.repetition_frequency}%</span></div>
@@ -403,26 +453,40 @@ const updateEffectiveRange = (relativeMinValue, relativeMaxValue, absoluteValue)
     document.querySelector(':root').style.setProperty('--max-value', `${maxAbsoluteValue}%`);
     // Value
     document.getElementById('effectiveRangeValue').innerHTML = `${minAbsoluteValue}%-${maxAbsoluteValue}%`;
-
-    
-    /* const sliderMinVol = document.getElementById('relativeMinVolumeSlider');
-    sliderMinVol.max = relativeMaxValue;
-    const sliderMaxVol = document.getElementById('relativeMaxVolumeSlider');
-    sliderMaxVol.min = relativeMinValue; */
   }
 }
 
+// LOGGING ####################################################################
 
-// ******************************************
+const logPlaying = (src, volume, isMuted) => {
+  const logger = document.getElementById('consoleContent');
+  if (isMuted) {
+    console.log('Muted');
+    logger.innerHTML = `<span class="log muted"><span>mute</span><span>${src}</span><span style="min-width: 24px"></span></span>${logger.innerHTML}`;
+    //console.log(`%cplaying ${src} ${roundToDecimals(volume * 100, 0)}%`, neutralValueStyle);
+  } else {
+    console.log('Not muted');
+    logger.innerHTML = `<span class="log active"><span>play</span><span>${src}</span><span>${roundToDecimals(volume * 100, 0)}%</span></span>${logger.innerHTML}`;
+    //console.log(`playing %c${src} %c%c${roundToDecimals(volume * 100, 0)}%`, basicValueStyle, baseColor, basicValueStyle);
+  }
+}
+
+const logSkipped = (src) => {
+  console.log('Skipped');
+  const logger = document.getElementById('consoleContent');
+  logger.innerHTML = `<span class="log skipped"><span>skip</span><span>${src}</span><span style="min-width: 24px"></span></span>${logger.innerHTML}`;
+}
+
+// PLAYING CONFIGURATION ######################################################
 
 const createEnvironmentPlayingAudioArray = (envName) => {
   PLAYING_AUDIO_ARRAY = [];
-  environmentEventsPacksArray = [];
+  eventsBankArray = [];
+  eventsPacksBankArray = [];
 
   let soundBase = getEnvironmentSoundBase(envName);
 
   for (let sound of soundBase) {
-    //console.log(sound);
     if (sound.type === 'Background') {
       let obj = {
         type: sound.type,
@@ -471,20 +535,17 @@ const createEnvironmentPlayingAudioArray = (envName) => {
   // EVENTS =========================================================
 
   let tempArray1 = soundBase.filter(sound => sound.type === 'Event');
-  //console.log(tempArray1);
 
   for (let soundPack of tempArray1) {
     let bank = createAudioPlayer(soundPack);
 
-    environmentEventsArray.push({
+    eventsBankArray.push({
       name: soundPack.name,
       bank: bank
     });
   }
 
-  //console.dir(environmentEventsArray);
-
-  for (let event of environmentEventsArray) {
+  for (let event of eventsBankArray) {
     event.bank.start();
   }
 
@@ -492,24 +553,20 @@ const createEnvironmentPlayingAudioArray = (envName) => {
   // EVENTS PACKS =================================================
 
   let tempArray2 = soundBase.filter(sound => sound.type === 'Events pack');
-  //console.log(tempArray2);
 
   for (let soundPack of tempArray2) {
     let bank = createAudioPlayer(soundPack);
 
-    environmentEventsPacksArray.push({
+    eventsPacksBankArray.push({
       name: soundPack.name,
       bank: bank
     });
   }
 
-  //console.dir(environmentEventsPacksArray);
-
-  for (let eventPack of environmentEventsPacksArray) {
+  for (let eventPack of eventsPacksBankArray) {
     eventPack.bank.start();
   }
 }
-
 
 const playBackgroundSoundsArray = () => {
   for (let obj of PLAYING_AUDIO_ARRAY) {
@@ -522,46 +579,10 @@ const playBackgroundSoundsArray = () => {
   }
 }
 
-const playEventsPackRandomAudio = (audioList) => {
-  const baseColor = 'color: #FFFFFF;';
-  const basicValueStyle = 'color: #5CD2F8;';
-  const neutralValueStyle = 'color: #BBBBBB;';
-
-  if (audioList.length === 0) return;
-
-  const randomAudio = audioList[getRandomIntegerBetween(0, audioList.length - 1)];
-  let slider = getUserSliderBySoundName(randomAudio.name);
-  //console.log(slider);
-  let randomSkip = getRandomIntegerBetween(0, 100);
-  //console.log(`${randomSkip}/${slider.skip_frequency}`);
-  if (randomSkip > slider.skip_frequency) {
-    if (slider.relative_min_volume != null && slider.relative_max_volume != null) {
-      let minAbsoluteValue = roundToDecimals((slider.relative_min_volume / 100) * slider.absolute_volume, 2);
-      let maxAbsoluteValue = roundToDecimals((slider.relative_max_volume / 100) * slider.absolute_volume, 2);
-      let randomVolume = roundToDecimals(getRandomIntegerBetween(minAbsoluteValue, maxAbsoluteValue) / 100, 2);
-      randomAudio.audio.volume = randomVolume;
-      randomAudio.audio.play();
-      if (slider.muted) {
-        console.log(`%cplaying ${randomAudio.src} @ ${roundToDecimals(randomVolume * 100, 0)}%`, neutralValueStyle);
-      } else {
-        console.log(`playing %c${randomAudio.src} %c@ %c${roundToDecimals(randomVolume * 100, 0)}%`, basicValueStyle, baseColor, basicValueStyle);
-      }
-    } 
-  } else {
-    //console.log('Skipped');
-  }
-}
-
 const playEventAudio = (soundName) => {
-  const baseColor = 'color: #FFFFFF;';
-  const basicValueStyle = 'color: #5CD2F8;';
-  const neutralValueStyle = 'color: #BBBBBB;';
-
   const audio = PLAYING_AUDIO_ARRAY.find(e => e.name === soundName);
   let slider = getUserSliderBySoundName(audio.name);
-  //console.log(slider);
   let randomSkip = getRandomIntegerBetween(0, 100);
-  //console.log(`${randomSkip}/${slider.skip_frequency}`);
   if (randomSkip > slider.skip_frequency) {
     if (slider.relative_min_volume != null && slider.relative_max_volume != null) {
       let minAbsoluteValue = roundToDecimals((slider.relative_min_volume / 100) * slider.absolute_volume, 2);
@@ -569,27 +590,37 @@ const playEventAudio = (soundName) => {
       let randomVolume = roundToDecimals(getRandomIntegerBetween(minAbsoluteValue, maxAbsoluteValue) / 100, 2);
       audio.audio.volume = randomVolume;
       audio.audio.play();
-      if (slider.muted) {
-        console.log(`%cplaying ${audio.src} @ ${roundToDecimals(randomVolume * 100, 0)}%`, neutralValueStyle);
-      } else {
-        console.log(`playing %c${audio.src} %c@ %c${roundToDecimals(randomVolume * 100, 0)}%`, basicValueStyle, baseColor, basicValueStyle);
-      }
+      logPlaying(audio.src, randomVolume, slider.muted);
     } 
   } else {
-    //console.log('Skipped');
+    logSkipped(audio.src);
   }
 }
 
-/* function getRealDelay(repetitionFrequency, longuestDuration) {
-  if (repetitionFrequency === 0) { repetitionFrequency = 1 };
-  repetitionFrequency = 100 - repetitionFrequency + 1;
-  return repetitionFrequency * longuestDuration;
-} */
+const playEventsPackRandomAudio = (audioList) => {
+  if (audioList.length === 0) return;
+
+  const randomAudio = audioList[getRandomIntegerBetween(0, audioList.length - 1)];
+  let slider = getUserSliderBySoundName(randomAudio.name);
+  let randomSkip = getRandomIntegerBetween(0, 100);
+  if (randomSkip > slider.skip_frequency) {
+    if (slider.relative_min_volume != null && slider.relative_max_volume != null) {
+      let minAbsoluteValue = roundToDecimals((slider.relative_min_volume / 100) * slider.absolute_volume, 2);
+      let maxAbsoluteValue = roundToDecimals((slider.relative_max_volume / 100) * slider.absolute_volume, 2);
+      let randomVolume = roundToDecimals(getRandomIntegerBetween(minAbsoluteValue, maxAbsoluteValue) / 100, 2);
+      randomAudio.audio.volume = randomVolume;
+      randomAudio.audio.play();
+      logPlaying(randomAudio.src, randomVolume, slider.muted);
+    } 
+  } else {
+    logSkipped(randomAudio.src);
+  }
+}
 
 function getRealDelay(repetitionFrequency, longuestDuration) {
-  //console.log(repetitionFrequency);
-  //console.log(longuestDuration);
-  if (repetitionFrequency === 0) { repetitionFrequency = 1; }
+  if (repetitionFrequency === 0) { 
+    repetitionFrequency = 1; 
+  }
 
   let invertedFreq = (101 - repetitionFrequency); // Garde une échelle de 1 à 100
 
@@ -600,21 +631,6 @@ function getRealDelay(repetitionFrequency, longuestDuration) {
   //console.log(finalDelay);
   return finalDelay;
 }
-
-/* function getRealDelay(repetitionFrequency, longuestDuration) {
-  if (repetitionFrequency === 0) { repetitionFrequency = 1; }
-  
-  // Inverser la fréquence pour que 100 soit le plus rapide et 1 le plus lent
-  let invertedFreq = (101 - repetitionFrequency) / 100; 
-
-  // Facteur exponentiel (ajuste selon le ressenti)
-  let alpha = 2.5;  
-
-  // Calcul du délai exponentiel
-  let real = longuestDuration * Math.pow(invertedFreq, alpha);
-  console.log(real)
-  return real;
-} */
 
 function createAudioPlayer(soundPack) {
   let audioList = PLAYING_AUDIO_ARRAY.filter(obj => obj.name === soundPack.name);
@@ -661,28 +677,20 @@ function createAudioPlayer(soundPack) {
   return { start, updateDelay, stop };
 }
 
-
-
 const updateCurrentAbsoluteVolume = (name, value) => {
   for (let obj of PLAYING_AUDIO_ARRAY) {
     if (obj.name !== undefined && obj.name === name) {
       obj.audio.volume = value / 100;
-      //obj.audio.play();
     }
   }
 }
 
+// INITIALIZATION /////////////////////////////////////////////////////////////////////////////////
 
-/* ########################################################### */
-/* INITIALIZATION */
-/* ########################################################### */
 logAppInfos(APP_NAME, APP_VERSION);
 setHTMLTitle(APP_NAME);
-
 setStorage();
 
+// EXECUTION //////////////////////////////////////////////////////////////////////////////////////
 
-/* ########################################################### */
-/* EXECUTION */
-/* ########################################################### */
 setHomepage();
