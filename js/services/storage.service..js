@@ -9,6 +9,10 @@ export const setStorage = () => {
     STORAGE.setItem(`${appLocalStorageId}FirstTime`, '0');
     
     let userTMP = {
+      parameters:  [
+        { id: 'theme', value: 'green' },
+        { id: 'expanded', value: true },
+      ],
       sliders: [],
     };
     STORAGE.setItem(`${appLocalStorageId}User`, JSON.stringify(userTMP));
@@ -25,6 +29,45 @@ export const setUser = (user) => {
   STORAGE.setItem(`${appLocalStorageId}User`, JSON.stringify(user));
 }
 
+export const isExpanded = () => {
+  const user = getUser();
+  for (const parameter of user.parameters) {
+    if (parameter.id == 'expanded') {
+      return parameter.value;
+    }
+  }
+  return true;
+}
+
+export const setExpanded = (value) => {
+  let user = getUser();
+  for (const parameter of user.parameters) {
+    if (parameter.id == 'expanded') {
+      parameter.value = value;
+    }
+  }
+  setUser(user);
+}
+
+export const getTheme = () => {
+  const user = getUser();
+  for (const parameter of user.parameters) {
+    if (parameter.id == 'theme') {
+      return parameter.value;
+    }
+  }
+  return 'green';
+}
+
+export const setTheme = (value) => {
+  let user = getUser();
+  for (const parameter of user.parameters) {
+    if (parameter.id == 'theme') {
+      parameter.value = value;
+    }
+  }
+  setUser(user);
+}
 
 export const getSoundBase = () => {
   const soundBase = [];

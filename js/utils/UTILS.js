@@ -120,7 +120,8 @@ export const getFullTimeStringFromMilliseconds = (milliseconds = 0) => {
       : timeObj.milliseconds < 100 
         ? `0${roundToDecimals(Number(timeObj.milliseconds), 0)}` 
         : roundToDecimals(Number(timeObj.milliseconds), 0)}ms`;
-  return `${hoursStr} ${minutesStr} ${secondsStr} ${millisecondsStr}`;
+  //return `${hoursStr} ${minutesStr} ${secondsStr} ${millisecondsStr}`;
+  return `${minutesStr} ${secondsStr} ${millisecondsStr}`;
 }
 
 export const getCurrentEnv = () => {

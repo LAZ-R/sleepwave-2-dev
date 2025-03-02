@@ -112,7 +112,7 @@ button {
     &:active {
       background-color: var(--color--bg-100);
       color: var(--color--fg-100);
-      border: none;
+      border: 1px solid var(--color--fg-0);
     }
   }
 }
@@ -475,6 +475,149 @@ html, body {
         opacity: .33;
       }
     }
+
+  }
+}
+
+.floating-settings-page {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: calc(100svw - 16px); width: calc(100svw - 16px); max-width: calc(100svw - 16px);
+  min-height: calc(100svh - 16px); height: calc(100svh - 16px); max-height: calc(100svh - 16px);
+  background-color: black;
+  border: 1px solid var(--color--fg-0);
+
+  &.disabled {
+    display: none;
+  }
+
+  .settings-header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 8px;
+    border-bottom: 1px solid var(--color--fg-0);
+
+    button {
+      position: absolute;
+      right: 12px;
+      padding: 0;
+    }
+  }
+
+  .settings-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    min-height: calc(100% - 36px); height: calc(100% - 36px); max-height: calc(100% - 36px);
+    overflow-y: scroll;
+    padding: 16px;
+    gap: 8px;
+
+    .setting-bloc {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+
+      .color-buttons-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 8px;
+        gap: 16px;
+  
+        .setting-color-bloc {
+          --size: 16px;
+    
+          position: relative;
+          padding: 0;
+          margin: 0;
+          min-width: var(--size); width: var(--size); max-width: var(--size);
+          min-height: var(--size); height: var(--size); max-height: var(--size);
+    
+          &.green {
+            background-color: var(--nostromo-green);
+          }
+    
+          &.orange {
+            background-color: var(--nostromo-orange);
+          }
+  
+          &.blue {
+            background-color: var(--nostromo-blue);
+          }
+  
+          &.aqua {
+            background-color: var(--nostromo-aqua);
+          }
+
+          &.pink {
+            background-color: var(--nostromo-pink);
+          }
+
+          &.yellow {
+            background-color: var(--nostromo-yellow);
+          }
+
+          &.white {
+            background-color: var(--nostromo-white);
+          }
+  
+          &.h3oplus {
+            background: linear-gradient(
+              135deg, 
+              var(--nostromo-aqua) 0%, 
+              var(--nostromo-aqua) 50%, 
+              var(--nostromo-orange) 51%, 
+              var(--nostromo-orange) 100%
+            );
+          }
+
+          &.hulk {
+            background: linear-gradient(
+              135deg, 
+              var(--nostromo-green) 0%, 
+              var(--nostromo-green) 50%, 
+              var(--nostromo-pink) 51%, 
+              var(--nostromo-pink) 100%
+            );
+          }
+    
+          &.selected {
+            &::before {
+              content: '';
+              position: absolute;
+    
+              min-width: calc(4px + var(--size)); width: calc(4px + var(--size)); max-width: calc(4px + var(--size));
+              min-height: calc(4px + var(--size)); height: calc(4px + var(--size)); max-height: calc(4px + var(--size));
+    
+              border: 1px solid var(--primary);
+            }
+          }
+        }
+      }
+
+      .setting-bloc-buttons-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 8px;
+      }
+    }
+
 
   }
 }

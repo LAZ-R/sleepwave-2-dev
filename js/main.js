@@ -1,7 +1,7 @@
 import { APP_NAME, APP_VERSION } from "../app-properties.js";
 import { ENVIRONMENTS } from "./data/environments.data.js";
 import { getSvgIcon } from "./services/icons.service.js";
-import { getEnvironmentSoundBase, getSoundBase, getUser, setStorage, setUser } from "./services/storage.service..js";
+import { getEnvironmentSoundBase, getSoundBase, getTheme, getUser, isExpanded, setExpanded, setStorage, setTheme, setUser } from "./services/storage.service..js";
 import { showToast } from "./services/toast.service.js";
 import { convertMillisecondsToTime, convertTimeToMilliseconds, getCompactTimeString, getFullTimeString, getFullTimeStringFromMilliseconds, getRandomIntegerBetween, logAppInfos, roundToDecimals, setHTMLTitle } from "./utils/UTILS.js";
 
@@ -18,6 +18,32 @@ let eventsPacksBankArray = [];
 // USER INTERACTIONS ##########################################################
 
 // HOMEPAGE ===============================================
+// Settings ------------------------------------------------
+const onSettingsButtonClick = () => {
+  document.getElementById('settingsPage').classList.remove('disabled');
+  setSettingsPage();
+}
+window.onSettingsButtonClick = onSettingsButtonClick;
+
+const onCloseSettingsClick = () => {
+  document.getElementById('settingsPage').classList.add('disabled');
+}
+window.onCloseSettingsClick = onCloseSettingsClick;
+
+const onColorBlocClick = (value) => {
+  setTheme(value);
+  setIhmTheme(value);
+  const colorBlocs = document.getElementsByClassName('setting-color-bloc');
+  for (let button of colorBlocs) {
+    if (button.getAttribute('id') === value) {
+      button.classList.add('selected');
+    } else {
+      button.classList.remove('selected');
+    }
+  }
+}
+window.onColorBlocClick = onColorBlocClick;
+
 const onEnvButtonClick = (envName) => {
   for (let environment of ENVIRONMENTS) {
     if (environment.name == envName) {
@@ -27,6 +53,7 @@ const onEnvButtonClick = (envName) => {
   }
 }
 window.onEnvButtonClick = onEnvButtonClick;
+
 
 // ENVIRONMENT SCREEN =====================================
 
@@ -273,8 +300,123 @@ const setHomepage = () => {
 }
 
 const renderHomepageHeader = () => {
-  HEADER.innerHTML = `<p style="margin: 0 auto;">SLEEPWAVE 2 (dev) v ${APP_VERSION}</p>`;
+  HEADER.innerHTML = `<p>SLEEPWAVE 2 (dev) v ${APP_VERSION}</p><button onclick="onSettingsButtonClick()" class="outlined">settings</button>`;
 }
+
+// SETTINGS ===============================================
+
+const setSettingsPage = () => {
+  const user = getUser();
+
+  const element = document.getElementById('settingsContent');
+
+  element.innerHTML = `
+    <div class="setting-bloc">
+      <span>theme</span>
+      <div class="color-buttons-container">
+        <button id="green" class="setting-color-bloc green ${getTheme() == 'green' ? 'selected' : ''}" onclick="onColorBlocClick('green')"></button>
+        <button id="aqua" class="setting-color-bloc aqua ${getTheme() == 'aqua' ? 'selected' : ''}" onclick="onColorBlocClick('aqua')"></button>
+        <button id="blue" class="setting-color-bloc blue ${getTheme() == 'blue' ? 'selected' : ''}" onclick="onColorBlocClick('blue')"></button>
+        <button id="pink" class="setting-color-bloc pink ${getTheme() == 'pink' ? 'selected' : ''}" onclick="onColorBlocClick('pink')"></button>
+        <button id="yellow" class="setting-color-bloc yellow ${getTheme() == 'yellow' ? 'selected' : ''}" onclick="onColorBlocClick('yellow')"></button>
+        <button id="orange" class="setting-color-bloc orange ${getTheme() == 'orange' ? 'selected' : ''}" onclick="onColorBlocClick('orange')"></button>
+        <button id="white" class="setting-color-bloc white ${getTheme() == 'white' ? 'selected' : ''}" onclick="onColorBlocClick('white')"></button>
+      </div>
+      <div class="color-buttons-container" style="margin-top: 16px;">
+        <button id="h3oplus" class="setting-color-bloc h3oplus ${getTheme() == 'h3oplus' ? 'selected' : ''}" onclick="onColorBlocClick('h3oplus')"></button>
+        <button id="hulk" class="setting-color-bloc hulk ${getTheme() == 'hulk' ? 'selected' : ''}" onclick="onColorBlocClick('hulk')"></button>
+      </div>
+    </div>
+  <hr>
+    <div class="setting-bloc">
+      <span>categories</span>
+      <div class="setting-bloc-buttons-container">
+        <button id="expanded" class="${isExpanded() ? 'solid' : 'outlined'}" onclick="onExpandSettingClick('expanded')">Expanded by default</button>
+        <button id="collapsed" class="${isExpanded() ? 'outlined' : 'solid'}" onclick="onExpandSettingClick('collapsed')">Collapsed by default</button>
+      </div>
+    </div>
+        `;
+}
+
+const onExpandSettingClick = (value) => {
+  setExpanded(value == 'expanded');
+  if (value == 'expanded') {
+    document.getElementById('expanded').classList.remove('outlined');
+    document.getElementById('expanded').classList.add('solid');
+    document.getElementById('collapsed').classList.remove('solid');
+    document.getElementById('collapsed').classList.add('outlined');
+  } else {
+    document.getElementById('collapsed').classList.remove('outlined');
+    document.getElementById('collapsed').classList.add('solid');
+    document.getElementById('expanded').classList.remove('solid');
+    document.getElementById('expanded').classList.add('outlined');
+  }
+}
+window.onExpandSettingClick = onExpandSettingClick;
+
+const setIhmTheme = () => {
+  const user = getUser();
+  let value = '';
+  for (let setting of user.parameters) {
+    if (setting.id == 'theme') {
+      value = setting.value;
+    }
+  }
+
+  switch (value) {
+    case 'green':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-green)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-green-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-green-filter)`);
+      break;
+    case 'orange':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-orange)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-orange-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-orange-filter)`);
+      break;
+    case 'blue':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-blue)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-blue-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-blue-filter)`);
+      break;
+    case 'aqua':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-aqua)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-aqua-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-aqua-filter)`);
+      break;
+    case 'pink':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-pink)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-pink-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-pink-filter)`);
+      break;
+    case 'yellow':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-yellow)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-yellow-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-yellow-filter)`);
+      break;
+    case 'white':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-white)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-white-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-white-filter)`);
+      break;
+    case 'h3oplus':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-aqua)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-aqua-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-orange-filter)`);
+      break;
+    case 'hulk':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-green)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-green-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-pink-filter)`);
+      break;
+    default:
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-green)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-green-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-green-filter)`);
+      break;
+  }
+}
+
 // ENVIRONMENT SCREEN =====================================
 
 const setEnvPage = (environment) => {
@@ -321,7 +463,7 @@ const getCategoryBloc = (category) => {
     <div class="category-container">
       <div class="category-header">
         <span>${category.name}</span>
-        <input type="checkbox" class="category-checkbox" name="" id="" checked>
+        <input type="checkbox" class="category-checkbox" name="" id="" ${isExpanded() ? 'checked' : ''}>
       </div>
 
       ${soundBlocsStr}
@@ -360,7 +502,7 @@ const getSoundDetailsScreen = (sound) => {
       if (element.duration > longestDuration) {
         longestDuration = element.duration;
       }
-      audioFilesStr += `<div class="space-between-line"><span>${index}. ${element.src}</span><span>${getFullTimeStringFromMilliseconds(element.duration) }</span></div>`;
+      audioFilesStr += `<div class="space-between-line"><span>${index + 1}.${element.src}</span><span>${getFullTimeStringFromMilliseconds(element.duration) }</span></div>`;
     }
   }
 
@@ -461,18 +603,16 @@ const updateEffectiveRange = (relativeMinValue, relativeMaxValue, absoluteValue)
 const logPlaying = (src, volume, isMuted) => {
   const logger = document.getElementById('consoleContent');
   if (isMuted) {
-    console.log('Muted');
+    //console.log('Muted');
     logger.innerHTML = `<span class="log muted"><span>mute</span><span>${src}</span><span style="min-width: 24px"></span></span>${logger.innerHTML}`;
-    //console.log(`%cplaying ${src} ${roundToDecimals(volume * 100, 0)}%`, neutralValueStyle);
   } else {
-    console.log('Not muted');
+    //console.log('Not muted');
     logger.innerHTML = `<span class="log active"><span>play</span><span>${src}</span><span>${roundToDecimals(volume * 100, 0)}%</span></span>${logger.innerHTML}`;
-    //console.log(`playing %c${src} %c%c${roundToDecimals(volume * 100, 0)}%`, basicValueStyle, baseColor, basicValueStyle);
   }
 }
 
 const logSkipped = (src) => {
-  console.log('Skipped');
+  //console.log('Skipped');
   const logger = document.getElementById('consoleContent');
   logger.innerHTML = `<span class="log skipped"><span>skip</span><span>${src}</span><span style="min-width: 24px"></span></span>${logger.innerHTML}`;
 }
@@ -692,5 +832,5 @@ setHTMLTitle(APP_NAME);
 setStorage();
 
 // EXECUTION //////////////////////////////////////////////////////////////////////////////////////
-
+setIhmTheme();
 setHomepage();

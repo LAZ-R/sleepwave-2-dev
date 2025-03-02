@@ -19,7 +19,7 @@ export const ENVIRONMENTS = [
             type: 'Background',
             audio_file: {
               src: 'indoor-rain.mp3',
-              duration: 993000,
+              duration: 980030,
             },
           },
           {
@@ -37,32 +37,58 @@ export const ENVIRONMENTS = [
         name: 'City ambiance',
         sounds: [
           {
-            name: 'City speaker',
+            name: 'City speaker (female)',
             type: 'Events pack',
             audio_files_pack: [ 
               {
-                src: 'city-speaker-01.mp3',
+                src: 'city-speaker-f-01.mp3',
                 duration: 19000,
               },
               {
-                src: 'city-speaker-02.mp3',
+                src: 'city-speaker-f-02.mp3',
                 duration: 17000,
               },
               {
-                src: 'city-speaker-03.mp3',
+                src: 'city-speaker-f-03.mp3',
                 duration: 31000,
               },
               {
-                src: 'city-speaker-04.mp3',
+                src: 'city-speaker-f-04.mp3',
                 duration: 17000,
               },
               {
-                src: 'city-speaker-05.mp3',
+                src: 'city-speaker-f-05.mp3',
                 duration: 19000,
               },
               {
-                src: 'city-speaker-06.mp3',
+                src: 'city-speaker-f-06.mp3',
                 duration: 20000,
+              },
+            ],
+          },
+          {
+            name: 'City speaker (male)',
+            type: 'Events pack',
+            audio_files_pack: [ 
+              {
+                src: 'city-speaker-m-01.mp3',
+                duration: 14000,
+              },
+              {
+                src: 'city-speaker-m-02.mp3',
+                duration: 13000,
+              },
+              {
+                src: 'city-speaker-m-03.mp3',
+                duration: 10000,
+              },
+              {
+                src: 'city-speaker-m-04.mp3',
+                duration: 29000,
+              },
+              {
+                src: 'city-speaker-m-05.mp3',
+                duration: 8000,
               },
             ],
           },
@@ -81,6 +107,10 @@ export const ENVIRONMENTS = [
               {
                 src: 'police-03.mp3',
                 duration: 21000,
+              },
+              {
+                src: 'police-03.mp3',
+                duration: 23000,
               },
             ],
           },
