@@ -32,7 +32,7 @@ hr {
   min-height: 1px; height: 1px; max-height: 1px;
   border: none;
   width: 100%;
-  background-color: var(--color--fg-0);
+  background-color: var(--primary);
   margin: 8px 0;
 }
 
@@ -59,8 +59,8 @@ input[type="checkbox"] {
       display: flex;
       min-width: 16px;
       min-height: 16px;
-      border-left: 4px solid var(--color--fg-0);
-      border-bottom: 4px solid var(--color--fg-0);
+      border-left: 4px solid var(--secondary);
+      border-bottom: 4px solid var(--secondary);
       transform: rotate(-45deg) translateX(2px) translateY(-2px) scale(.60);
     }
 
@@ -80,7 +80,7 @@ button {
   padding: 4px 8px;
   margin: 0;
   background-color: transparent;
-  color: var(--color--fg-0);
+  color: var(--primary);
   border: none;
   border-radius: var(--border-radius--button);
   -webkit-tap-highlight-color: transparent;
@@ -95,24 +95,24 @@ button {
   }
 
   &.solid {
-    border: 1px solid var(--color--fg-0);
+    border: 1px solid var(--primary);
     background-color: var(--color--bg-100);
     color: var(--color--fg-100);
 
     &:active {
       background-color: var(--color--bg-0);
-      color: var(--color--fg-0);
-      border: 1px solid var(--color--fg-0);
+      color: var(--primary);
+      border: 1px solid var(--primary);
     }
   }
   &.outlined {
-    border: 1px solid var(--color--fg-0);
-    color: var(--color--fg-0);
+    border: 1px solid var(--primary);
+    color: var(--primary);
 
     &:active {
       background-color: var(--color--bg-100);
       color: var(--color--fg-100);
-      border: 1px solid var(--color--fg-0);
+      border: 1px solid var(--primary);
     }
   }
 }
@@ -135,7 +135,9 @@ button {
   &.icon-xl  { width: 96px; height: 96px; }
 
   /* COLORS */
-  &.icon-fg-0   { path { fill: var(--color--fg-0); } }
+  &.icon-primary   { path { fill: var(--primary); } }
+  &.icon-secondary   { path { fill: var(--secondary); } }
+  &.icon-fg-0   { path { fill: var(--primary); } }
   &.icon-fg-10  { path { fill: var(--color--fg-10); } }
   &.icon-fg-20  { path { fill: var(--color--fg-20); } }
   &.icon-fg-30  { path { fill: var(--color--fg-30); } }
@@ -177,7 +179,7 @@ html, body {
     min-height: var(--height--header); height: var(--height--header); max-height: var(--height--header);
     padding: 0 16px;
     background-color: var(--color--bg-0);
-    border-bottom: 1px solid var(--color--fg-0);
+    border-bottom: 1px solid var(--primary);
 
     .home-button {
       --button-size: 24px;
@@ -190,7 +192,7 @@ html, body {
 
       .main-logo {
         height: 100%;
-        filter: var(--primary-filter);
+        filter: var(--secondary-filter);
       }
     }
 
@@ -278,7 +280,8 @@ html, body {
   min-width: calc(100svw - 16px); width: calc(100svw - 16px); max-width: calc(100svw - 16px);
   min-height: calc(100svh - 16px); height: calc(100svh - 16px); max-height: calc(100svh - 16px);
   background-color: black;
-  border: 1px solid var(--color--fg-0);
+  border: 1px solid var(--primary);
+  overflow-y: scroll;
 
   &.disabled {
     display: none;
@@ -291,7 +294,7 @@ html, body {
     align-items: center;
     width: 100%;
     padding: 8px;
-    border-bottom: 1px solid var(--color--fg-0);
+    border-bottom: 1px solid var(--primary);
 
     button {
       position: absolute;
@@ -317,6 +320,7 @@ html, body {
 
     .section-title {
       margin-bottom: 8px;
+      color: var(--secondary);
     }
 
     .slider-container {
@@ -332,8 +336,8 @@ html, body {
     .effective-range-overlay {
       position: absolute;
       bottom: calc(8px + 1px);
-      left: calc(1px + var(--min-value));
-      min-width: calc(var(--max-value) - var(--min-value) - 2px);
+      left: calc(1px + var(--volume-min-value));
+      min-width: calc(var(--volume-max-value) - var(--volume-min-value) - 2px);
       min-height: 22px; height: 22px; max-height: 22px;
       background-color: var(--color--bg-20);
       z-index: 100;
@@ -348,10 +352,18 @@ html, body {
       position: relative;
       margin: 8px 0;
       width: 100%;
-      height: 24px;
+      height: 32px;
       background-color: black;
-      border: 1px solid var(--color--fg-0);
+      border: 1px solid var(--primary);
       z-index: 998;
+
+      &.small {
+        height: 16px;
+
+        &::-webkit-slider-thumb {
+          height: 24px;
+        }
+      }
 
       &::-webkit-slider-thumb {
         box-sizing: border-box;
@@ -361,10 +373,10 @@ html, body {
 
         position: relative;
         width: 8px;
-        height: 32px;
+        height: 40px;
         /* background-color: var(--color--fg-20); */
         background-color: var(--color--bg-0);
-        border: 1px solid var(--color--fg-0);
+        border: 1px solid var(--primary);
         cursor: pointer;
         z-index: 999;
       }
@@ -373,16 +385,36 @@ html, body {
         &::before {
           content: '';
           position: absolute;
-          bottom: 0;
-          left: calc(1px + var(--min-value));
-          min-width: calc(var(--max-value) - var(--min-value) - 2px);
-          min-height: 22px; height: 22px; max-height: 22px;
+          bottom: 1px;
+          left: calc(1px + var(--volume-min-value));
+          min-width: calc(var(--volume-max-value) - var(--volume-min-value) - 2px);
+          min-height: 28px; height: 28px; max-height: 28px;
           background: repeating-linear-gradient(
             -45deg,
             #00000000,
             #00000000 5px,
-            var(--nostromo-green) 5px,
-            var(--nostromo-green) 10px
+            var(--secondary) 5px,
+            var(--secondary) 10px
+          );
+          z-index: 1;
+          opacity: .25;
+        }
+      }
+
+      &#absoluteRepetitionFrequencySlider {
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: 1px;
+          left: calc(1px + var(--frequency-min-value));
+          min-width: calc(var(--frequency-max-value) - var(--frequency-min-value) - 2px);
+          min-height: 28px; height: 28px; max-height: 28px;
+          background: repeating-linear-gradient(
+            -45deg,
+            #00000000,
+            #00000000 5px,
+            var(--secondary) 5px,
+            var(--secondary) 10px
           );
           z-index: 1;
           opacity: .25;
@@ -405,7 +437,7 @@ html, body {
     gap: 16px;
     margin-top: auto;
     padding: 8px;
-    border-top: 1px solid var(--color--fg-0);
+    border-top: 1px solid var(--primary);
   
     button {
       width: 50%;
@@ -425,7 +457,7 @@ html, body {
   min-width: calc(100svw - 16px); width: calc(100svw - 16px); max-width: calc(100svw - 16px);
   min-height: calc(100svh - 16px); height: calc(100svh - 16px); max-height: calc(100svh - 16px);
   background-color: black;
-  border: 1px solid var(--color--fg-0);
+  border: 1px solid var(--primary);
 
   &.disabled {
     display: none;
@@ -438,7 +470,7 @@ html, body {
     align-items: center;
     width: 100%;
     padding: 8px;
-    border-bottom: 1px solid var(--color--fg-0);
+    border-bottom: 1px solid var(--primary);
 
     button {
       position: absolute;
@@ -490,7 +522,7 @@ html, body {
   min-width: calc(100svw - 16px); width: calc(100svw - 16px); max-width: calc(100svw - 16px);
   min-height: calc(100svh - 16px); height: calc(100svh - 16px); max-height: calc(100svh - 16px);
   background-color: black;
-  border: 1px solid var(--color--fg-0);
+  border: 1px solid var(--primary);
 
   &.disabled {
     display: none;
@@ -503,7 +535,7 @@ html, body {
     align-items: center;
     width: 100%;
     padding: 8px;
-    border-bottom: 1px solid var(--color--fg-0);
+    border-bottom: 1px solid var(--primary);
 
     button {
       position: absolute;
@@ -573,6 +605,26 @@ html, body {
           &.white {
             background-color: var(--nostromo-white);
           }
+
+          &.nostromo {
+            background: linear-gradient(
+              135deg, 
+              var(--nostromo-green) 0%, 
+              var(--nostromo-green) 50%, 
+              var(--nostromo-white) 51%, 
+              var(--nostromo-white) 100%
+            );
+          }
+          
+          &.nostromo-2 {
+            background: linear-gradient(
+              135deg, 
+              var(--nostromo-orange) 0%, 
+              var(--nostromo-orange) 50%, 
+              var(--nostromo-yellow) 51%, 
+              var(--nostromo-yellow) 100%
+            );
+          }
   
           &.h3oplus {
             background: linear-gradient(
@@ -629,7 +681,7 @@ html, body {
   align-items: center;
   width: 100%;
   min-height: 40px; height: 40px; max-height: 40px;
-  border-bottom: 1px solid var(--color--fg-0);
+  border-bottom: 1px solid var(--primary);
 } */
 
 .category-container {
@@ -640,7 +692,7 @@ html, body {
   width: 100%;
   height: 40px;
   overflow: hidden;
-  border-bottom: 1px solid var(--color--fg-0);
+  border-bottom: 1px solid var(--primary);
 
   &:has(input[type="checkbox"]:checked) {
     min-height: fit-content; height: fit-content;
@@ -654,6 +706,7 @@ html, body {
     min-height: 40px; height: 40px; max-height: 40px;
     margin-bottom: 20px;
     padding: 0 8px;
+    color: var(--secondary);
   }
 
   .sound-bloc {
@@ -663,7 +716,7 @@ html, body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid var(--color--fg-0);
+    border: 1px solid var(--primary);
     border-right: none;
     /* border-bottom: none; */
     width: calc(100% - 24px);
@@ -677,7 +730,7 @@ html, body {
     }
       
     &:has(.mute-button.active) {
-      border: 1px solid var(--color--fg-0--alpha);
+      border: 1px solid var(--primary-alpha);
       /* border-bottom: none; */
 
       .connection1 {
@@ -701,8 +754,8 @@ html, body {
       left: -14px;
       min-width: 14px;
       min-height: 40px;
-      /* border-left: 1px solid var(--color--fg-0); */
-      border-bottom: 1px solid var(--color--fg-0);
+      /* border-left: 1px solid var(--primary); */
+      border-bottom: 1px solid var(--primary);
     }
     .connection2 {
       position: absolute;
@@ -710,8 +763,8 @@ html, body {
       left: -14px;
       min-width: 14px;
       min-height: 40px;
-      border-left: 1px solid var(--color--fg-0);
-     /*  border-bottom: 1px solid var(--color--fg-0); */
+      border-left: 1px solid var(--primary);
+     /*  border-bottom: 1px solid var(--primary); */
     }
     .sound-name {
       width: 163px; max-width: 163px;
@@ -721,7 +774,7 @@ html, body {
     }
     .sound-type-icon {
       width: 16px;
-      filter: var(--primary-filter);
+      filter: var(--secondary-filter);
     }
     .buttons-group {
       display: flex;
@@ -736,13 +789,13 @@ html, body {
       }
 
       .mute-button {
-        border: 1px solid var(--color--fg-0);
+        border: 1px solid var(--primary);
         color: var(--color--fg-100);
         background-color: var(--color--bg-100);
 
         &.active {
-          border: 1px solid var(--color--fg-0);
-          color: var(--color--fg-0);
+          border: 1px solid var(--primary);
+          color: var(--primary);
           background-color: transparent;
           /* opacity: .33; */
         }

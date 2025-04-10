@@ -106,7 +106,9 @@ const setBaseSliders = () => {
       absolute_volume: 100,
       relative_max_volume: sound.type == 'Background' ? null : 100,
       relative_min_volume: sound.type == 'Background' ? null : 100,
-      repetition_frequency: sound.type == 'Background' ? null : 100,
+      absolute_repetition_frequency: sound.type == 'Background' ? null : 100,
+      relative_max_repetition_frequency: sound.type == 'Background' ? null : 100,
+      relative_min_repetition_frequency: sound.type == 'Background' ? null : 100,
       skip_frequency: sound.type == 'Background' ? null : 0,
     })
   }
@@ -138,7 +140,9 @@ const setNewSliders = () => {
         absolute_volume: 100,
         relative_max_volume: sound.type == 'Background' ? null : 100,
         relative_min_volume: sound.type == 'Background' ? null : 100,
-        repetition_frequency: sound.type == 'Background' ? null : 100,
+        absolute_repetition_frequency: sound.type == 'Background' ? null : 100,
+        relative_max_repetition_frequency: sound.type == 'Background' ? null : 100,
+        relative_min_repetition_frequency: sound.type == 'Background' ? null : 100,
         skip_frequency: sound.type == 'Background' ? null : 0,
       })
     }

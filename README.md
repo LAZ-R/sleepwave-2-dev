@@ -1,4 +1,4 @@
-# SLEEPWAVE 2 (dev v0.0.7)
+# SLEEPWAVE 2 (dev v0.0.8)
 
 **[Virtual soundscape generator](https://laz-r.github.io/sleepwave-2-dev/)**
 

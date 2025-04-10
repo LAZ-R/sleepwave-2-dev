@@ -4,7 +4,7 @@
 /* ######################################################################### */
 
 export const getRandomIntegerBetween = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (Number(max) - Number(min) + 1)) + Number(min);
 }
 
 export const getRoundedPercentage = (part, total) => {
@@ -20,7 +20,7 @@ export const getNumberVariation = (n, percentage = 10) => {
 
 export const roundToDecimals = (num, decimals = 0) => {
   var p = Math.pow(10, decimals);
-  var n = (num * p) * (1 + Number.EPSILON);
+  var n = (Number(num) * p) * (1 + Number.EPSILON);
   return Math.round(n) / p;
 }
 

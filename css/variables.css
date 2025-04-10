@@ -1,8 +1,9 @@
 :root {
+  --volume-min-value: 33%;
+  --volume-max-value: 66%;
 
-  
-  --min-value: 33%;
-  --max-value: 66%;
+  --frequency-min-value: 33%;
+  --frequency-max-value: 66%;
 
   /* ####################################################################### */
   /* COLORS */
@@ -39,6 +40,10 @@
   --primary: var(--nostromo-green);
   --primary-alpha: var(--nostromo-green-alpha);
   --primary-filter: var(--nostromo-green-filter);
+
+  --secondary: var(--nostromo-orange);
+  --secondary-alpha: var(--nostromo-orange-alpha);
+  --secondary-filter: var(--nostromo-orange-filter);
 
   /* ======================================================= */
   /* RAW COLORS */

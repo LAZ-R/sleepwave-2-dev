@@ -1,4 +1,4 @@
-var cacheName = 'sleepwave-2-dev-007';
+var cacheName = 'sleepwave-2-dev-008';
 var filesToCache = [
   './',
   './index.html',
@@ -25,4 +25,4 @@ self.addEventListener('fetch', function(e) {
   );
 });
 
-const version = '0.0.7';
+const version = '0.0.8';
