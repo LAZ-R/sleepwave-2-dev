@@ -745,7 +745,7 @@ const getSoundDetailsScreen = (sound) => {
         <div class="space-between-line" style="margin-bottom: 16px;">
           <span style="display: flex; justify-content: flex-start; align-items: center; width: 100%;">
             <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px;" />
-            <span style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span style="display: flex; justify-content: center; align-items: center; width: 100%; gap: 16px;">
               <span id="relativeMaxDelayValue" style="color: var(--secondary);">${getFullTimeStringFromMilliseconds(getRealDelay(slider.relative_max_repetition_frequency, longestDuration))}</span>
               <span>to</span>
               <span id="relativeMinDelayValue" style="color: var(--secondary);">${getFullTimeStringFromMilliseconds(getRealDelay(slider.relative_min_repetition_frequency, longestDuration))}</span>
@@ -771,7 +771,7 @@ const getSoundDetailsScreen = (sound) => {
 
         <span class="section-title">Skip probability</span>
 
-        <div class="space-between-line" style="margin-bottom: 6px;">
+        <div class="space-between-line" style="margin-bottom: 16px;">
           <span style="display: flex; justify-content: flex-start; align-items: center">
             <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px;" />
               <span>
