@@ -319,7 +319,7 @@ html, body {
     }
 
     .section-title {
-      margin-bottom: 8px;
+      margin-bottom: 16px;
       color: var(--secondary);
     }
 
@@ -376,7 +376,7 @@ html, body {
         height: 40px;
         /* background-color: var(--color--fg-20); */
         background-color: var(--color--bg-0);
-        border: 1px solid var(--primary);
+        border: 1px solid var(--secondary);
         cursor: pointer;
         z-index: 999;
       }
@@ -393,8 +393,8 @@ html, body {
             -45deg,
             #00000000,
             #00000000 5px,
-            var(--secondary) 5px,
-            var(--secondary) 10px
+            var(--primary) 5px,
+            var(--primary) 10px
           );
           z-index: 1;
           opacity: .25;
@@ -413,8 +413,8 @@ html, body {
             -45deg,
             #00000000,
             #00000000 5px,
-            var(--secondary) 5px,
-            var(--secondary) 10px
+            var(--primary) 5px,
+            var(--primary) 10px
           );
           z-index: 1;
           opacity: .25;
@@ -570,7 +570,7 @@ html, body {
         gap: 16px;
   
         .setting-color-bloc {
-          --size: 16px;
+          --size: 20px;
     
           position: relative;
           padding: 0;
@@ -585,6 +585,10 @@ html, body {
           &.orange {
             background-color: var(--nostromo-orange);
           }
+
+          &.purple {
+            background-color: var(--nostromo-purple);
+          }
   
           &.blue {
             background-color: var(--nostromo-blue);
@@ -598,6 +602,10 @@ html, body {
             background-color: var(--nostromo-pink);
           }
 
+          &.teal {
+            background-color: var(--nostromo-teal);
+          }
+
           &.yellow {
             background-color: var(--nostromo-yellow);
           }
@@ -609,8 +617,8 @@ html, body {
           &.nostromo {
             background: linear-gradient(
               135deg, 
-              var(--nostromo-green) 0%, 
-              var(--nostromo-green) 50%, 
+              var(--nostromo-teal) 0%, 
+              var(--nostromo-teal) 50%, 
               var(--nostromo-white) 51%, 
               var(--nostromo-white) 100%
             );
@@ -643,6 +651,28 @@ html, body {
               var(--nostromo-green) 50%, 
               var(--nostromo-pink) 51%, 
               var(--nostromo-pink) 100%
+            );
+          }
+
+          &.nge {
+            background: linear-gradient(
+              135deg, 
+              var(--nostromo-purple) 0%, 
+              var(--nostromo-purple) 50%, 
+              var(--nostromo-green-2) 51%, 
+              var(--nostromo-green-2) 100%
+            );
+          }
+
+          &.rainbow {
+            background: linear-gradient(
+              135deg, 
+              var(--nostromo-orange) 0%, 
+              var(--nostromo-orange) 33%, 
+              var(--nostromo-teal) 34%, 
+              var(--nostromo-teal) 66%,
+              var(--nostromo-white) 67%, 
+              var(--nostromo-white) 100%
             );
           }
     

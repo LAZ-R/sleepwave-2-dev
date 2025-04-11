@@ -255,87 +255,98 @@ const onAbsoluteRepetitionFrequencySliderInput = (soundName) => {
 window.onAbsoluteRepetitionFrequencySliderInput = onAbsoluteRepetitionFrequencySliderInput;
 
 const onRelativeMaxRepetitionFrequencySliderInput = (soundName) => {
+  let userSlider = getUserSliderBySoundName(soundName);
   const sliderIhm = document.getElementById('relativeMaxRepetitionFrequencySlider');
   const value = sliderIhm.value;
-  //console.log(value);
-  let longestDuration = 0;
-  let sound = getSoundByName(soundName);
-  if (sound.type === 'Event') {
-    longestDuration = sound.audio_file.duration;
-  } else {
-    for (let index = 0; index < sound.audio_files_pack.length; index++) {
-      const element = sound.audio_files_pack[index];
-      if (element.duration > longestDuration) {
-        longestDuration = element.duration;
+  if (Number(value) >= Number(userSlider.relative_min_repetition_frequency)) {
+
+    //console.log(value);
+    let longestDuration = 0;
+    let sound = getSoundByName(soundName);
+    if (sound.type === 'Event') {
+      longestDuration = sound.audio_file.duration;
+    } else {
+      for (let index = 0; index < sound.audio_files_pack.length; index++) {
+        const element = sound.audio_files_pack[index];
+        if (element.duration > longestDuration) {
+          longestDuration = element.duration;
+        }
       }
     }
-  }
-
-  document.getElementById('relativeMaxRepetitionFrequencyValue').innerHTML = `${value}%`;
-  //document.getElementById('relativeMaxDelayValue').innerHTML = `${getFullTimeStringFromMilliseconds(getRealDelay(value, longestDuration))}`;
   
-  let user = getUser();
-  for (let slider of user.sliders) {
-    if (slider.name === soundName) {
-      slider.relative_max_repetition_frequency = value;
-      updateRepetitionFrequencyEffectiveRangeIhm(slider.relative_min_repetition_frequency, value, slider.absolute_repetition_frequency, longestDuration);
+    document.getElementById('relativeMaxRepetitionFrequencyValue').innerHTML = `${value}%`;
+    //document.getElementById('relativeMaxDelayValue').innerHTML = `${getFullTimeStringFromMilliseconds(getRealDelay(value, longestDuration))}`;
+    
+    let user = getUser();
+    for (let slider of user.sliders) {
+      if (slider.name === soundName) {
+        slider.relative_max_repetition_frequency = value;
+        updateRepetitionFrequencyEffectiveRangeIhm(slider.relative_min_repetition_frequency, value, slider.absolute_repetition_frequency, longestDuration);
+      }
     }
-  }
-  setUser(user);
-
-  for (let event of eventsBankArray) {
-    if (event.name === soundName) {
-      event.bank.updateDelay();
+    setUser(user);
+  
+    for (let event of eventsBankArray) {
+      if (event.name === soundName) {
+        event.bank.updateDelay();
+      }
     }
-  }
-
-  for (let eventPack of eventsPacksBankArray) {
-    if (eventPack.name === soundName) {
-      eventPack.bank.updateDelay();
+  
+    for (let eventPack of eventsPacksBankArray) {
+      if (eventPack.name === soundName) {
+        eventPack.bank.updateDelay();
+      }
     }
+  } else {
+    sliderIhm.value = userSlider.relative_min_repetition_frequency;
   }
 }
 window.onRelativeMaxRepetitionFrequencySliderInput = onRelativeMaxRepetitionFrequencySliderInput;
 
 const onRelativeMinRepetitionFrequencySliderInput = (soundName) => {
+  let userSlider = getUserSliderBySoundName(soundName);
   const sliderIhm = document.getElementById('relativeMinRepetitionFrequencySlider');
   const value = sliderIhm.value;
-  //console.log(value);
-  let longestDuration = 0;
-  let sound = getSoundByName(soundName);
-  if (sound.type === 'Event') {
-    longestDuration = sound.audio_file.duration;
-  } else {
-    for (let index = 0; index < sound.audio_files_pack.length; index++) {
-      const element = sound.audio_files_pack[index];
-      if (element.duration > longestDuration) {
-        longestDuration = element.duration;
+  if (Number(value) <= Number(userSlider.relative_max_repetition_frequency)) {
+    //console.log(value);
+    let longestDuration = 0;
+    let sound = getSoundByName(soundName);
+    if (sound.type === 'Event') {
+      longestDuration = sound.audio_file.duration;
+    } else {
+      for (let index = 0; index < sound.audio_files_pack.length; index++) {
+        const element = sound.audio_files_pack[index];
+        if (element.duration > longestDuration) {
+          longestDuration = element.duration;
+        }
       }
     }
-  }
-
-  document.getElementById('relativeMinRepetitionFrequencyValue').innerHTML = `${value}%`;
-  //document.getElementById('relativeMinDelayValue').innerHTML = `${getFullTimeStringFromMilliseconds(getRealDelay(value, longestDuration))}`;
   
-  let user = getUser();
-  for (let slider of user.sliders) {
-    if (slider.name === soundName) {
-      slider.relative_min_repetition_frequency = value;
-      updateRepetitionFrequencyEffectiveRangeIhm(value, slider.relative_max_repetition_frequency, slider.absolute_repetition_frequency, longestDuration);
+    document.getElementById('relativeMinRepetitionFrequencyValue').innerHTML = `${value}%`;
+    //document.getElementById('relativeMinDelayValue').innerHTML = `${getFullTimeStringFromMilliseconds(getRealDelay(value, longestDuration))}`;
+    
+    let user = getUser();
+    for (let slider of user.sliders) {
+      if (slider.name === soundName) {
+        slider.relative_min_repetition_frequency = value;
+        updateRepetitionFrequencyEffectiveRangeIhm(value, slider.relative_max_repetition_frequency, slider.absolute_repetition_frequency, longestDuration);
+      }
     }
-  }
-  setUser(user);
-
-  for (let event of eventsBankArray) {
-    if (event.name === soundName) {
-      event.bank.updateDelay();
+    setUser(user);
+  
+    for (let event of eventsBankArray) {
+      if (event.name === soundName) {
+        event.bank.updateDelay();
+      }
     }
-  }
-
-  for (let eventPack of eventsPacksBankArray) {
-    if (eventPack.name === soundName) {
-      eventPack.bank.updateDelay();
+  
+    for (let eventPack of eventsPacksBankArray) {
+      if (eventPack.name === soundName) {
+        eventPack.bank.updateDelay();
+      }
     }
+  } else {
+    sliderIhm.value = userSlider.relative_max_repetition_frequency;
   }
 }
 window.onRelativeMinRepetitionFrequencySliderInput = onRelativeMinRepetitionFrequencySliderInput;
@@ -418,26 +429,32 @@ const setSettingsPage = () => {
 
   element.innerHTML = `
     <div class="setting-bloc">
-      <span>theme</span>
-      <div class="color-buttons-container">
-        <button id="green" class="setting-color-bloc green ${getTheme() == 'green' ? 'selected' : ''}" onclick="onColorBlocClick('green')"></button>
-        <button id="aqua" class="setting-color-bloc aqua ${getTheme() == 'aqua' ? 'selected' : ''}" onclick="onColorBlocClick('aqua')"></button>
+      <spa style="color: var(--secondary);">theme</span>
+      <div class="color-buttons-container"">
+        <button id="rainbow" class="setting-color-bloc rainbow ${getTheme() == 'rainbow' ? 'selected' : ''}" onclick="onColorBlocClick('rainbow')"></button>
+      </div>
+      <div class="color-buttons-container" style="margin-top: 16px;"">
+        <!-- <button id="green" class="setting-color-bloc green ${getTheme() == 'green' ? 'selected' : ''}" onclick="onColorBlocClick('green')"></button> -->
+        <button id="teal" class="setting-color-bloc teal ${getTheme() == 'teal' ? 'selected' : ''}" onclick="onColorBlocClick('teal')"></button>
+        <!-- <button id="aqua" class="setting-color-bloc aqua ${getTheme() == 'aqua' ? 'selected' : ''}" onclick="onColorBlocClick('aqua')"></button> -->
         <button id="blue" class="setting-color-bloc blue ${getTheme() == 'blue' ? 'selected' : ''}" onclick="onColorBlocClick('blue')"></button>
+        <!-- <button id="purple" class="setting-color-bloc purple ${getTheme() == 'purple' ? 'selected' : ''}" onclick="onColorBlocClick('purple')"></button> -->
         <button id="pink" class="setting-color-bloc pink ${getTheme() == 'pink' ? 'selected' : ''}" onclick="onColorBlocClick('pink')"></button>
-        <button id="yellow" class="setting-color-bloc yellow ${getTheme() == 'yellow' ? 'selected' : ''}" onclick="onColorBlocClick('yellow')"></button>
         <button id="orange" class="setting-color-bloc orange ${getTheme() == 'orange' ? 'selected' : ''}" onclick="onColorBlocClick('orange')"></button>
+        <button id="yellow" class="setting-color-bloc yellow ${getTheme() == 'yellow' ? 'selected' : ''}" onclick="onColorBlocClick('yellow')"></button>
         <button id="white" class="setting-color-bloc white ${getTheme() == 'white' ? 'selected' : ''}" onclick="onColorBlocClick('white')"></button>
       </div>
       <div class="color-buttons-container" style="margin-top: 16px;">
-        <button id="nostromo" class="setting-color-bloc nostromo ${getTheme() == 'nostromo' ? 'selected' : ''}" onclick="onColorBlocClick('nostromo')"></button>
         <button id="nostromo-2" class="setting-color-bloc nostromo-2 ${getTheme() == 'nostromo-2' ? 'selected' : ''}" onclick="onColorBlocClick('nostromo-2')"></button>
+        <button id="nostromo" class="setting-color-bloc nostromo ${getTheme() == 'nostromo' ? 'selected' : ''}" onclick="onColorBlocClick('nostromo')"></button>
+        <button id="nge" class="setting-color-bloc nge ${getTheme() == 'nge' ? 'selected' : ''}" onclick="onColorBlocClick('nge')"></button>
         <button id="h3oplus" class="setting-color-bloc h3oplus ${getTheme() == 'h3oplus' ? 'selected' : ''}" onclick="onColorBlocClick('h3oplus')"></button>
-        <button id="hulk" class="setting-color-bloc hulk ${getTheme() == 'hulk' ? 'selected' : ''}" onclick="onColorBlocClick('hulk')"></button>
+        <!-- <button id="hulk" class="setting-color-bloc hulk ${getTheme() == 'hulk' ? 'selected' : ''}" onclick="onColorBlocClick('hulk')"></button> -->
       </div>
     </div>
   <hr>
     <div class="setting-bloc">
-      <span>categories</span>
+      <span style="color: var(--secondary);">categories</span>
       <div class="setting-bloc-buttons-container">
         <button id="expanded" class="${isExpanded() ? 'solid' : 'outlined'}" onclick="onExpandSettingClick('expanded')">Expanded by default</button>
         <button id="collapsed" class="${isExpanded() ? 'outlined' : 'solid'}" onclick="onExpandSettingClick('collapsed')">Collapsed by default</button>
@@ -480,6 +497,14 @@ const setIhmTheme = () => {
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-blue-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-blue-filter)`);
       break;
+    case 'purple':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-purple)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-purple-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-purple-filter)`);
+      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-purple)`);
+      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-purple-alpha)`);
+      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-purple-filter)`);
+      break;
     case 'aqua':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-aqua)`);
       document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-aqua-alpha)`);
@@ -495,6 +520,14 @@ const setIhmTheme = () => {
       document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-pink)`);
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-pink-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-pink-filter)`);
+      break;
+    case 'teal':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-teal)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-teal-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-teal-filter)`);
+      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-teal)`);
+      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-teal-alpha)`);
+      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-teal-filter)`);
       break;
     case 'yellow':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-yellow)`);
@@ -513,12 +546,20 @@ const setIhmTheme = () => {
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-white-filter)`);
       break;
     case 'nostromo':
-      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-green)`);
-      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-green-alpha)`);
-      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-green-filter)`);
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-teal)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-teal-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-teal-filter)`);
       document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-white)`);
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-white-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-white-filter)`);
+      break;
+    case 'nge':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-purple)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-purple-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-purple-filter)`);
+      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-green-2)`);
+      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-green-2-alpha)`);
+      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-green-2-filter)`);
       break;
     case 'nostromo-2':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-orange)`);
@@ -527,6 +568,14 @@ const setIhmTheme = () => {
       document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-yellow)`);
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-yellow-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-yellow-filter)`);
+      break;
+    case 'rainbow':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-teal)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-teal-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-teal-filter)`);
+      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-white)`);
+      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-orange-alpha)`);
+      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-orange-filter)`);
       break;
     case 'h3oplus':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-aqua)`);
@@ -568,7 +617,7 @@ const renderEnvironmentHeader = (environment) => {
     <button class="home-button" onclick="onHomeClick()"><img class="main-logo" src="./medias/images/logo.png" /></button>
     <p>${environment.name}</p>
     <!-- <button class="logs-button" onclick="onConsoleButtonClick()"></button> -->
-    <span style="display: flex; justify-content: flex-end; align-items: center; gap: 8px;">
+    <span style="display: flex; justify-content: flex-end; align-items: center; gap: 16px;">
       <button class="outlined" onclick="onConsoleButtonClick()">${getSvgIcon('list', 'icon-xs icon-secondary')}</button>
       <button onclick="onSettingsButtonClick()" class="outlined">${getSvgIcon('gear', 'icon-xs icon-secondary')}</button>
     </span>`;
@@ -646,12 +695,13 @@ const getSoundDetailsScreen = (sound) => {
 
   let str = `
     <div class="edit-header">
-      <span style="color: var(--secondary)">${sound.name}</span>
+      <span>${sound.name}</span>
       <button class="" onclick="onCloseDetailsClick()" style="color: var(--secondary)">X</button>
     </div>
 
     <div class="edit-content">
-      <span class="section-title"><img style="height: 16px; filter: var(--secondary-filter); transform: translateY(2px);" src="./medias/images/${sound.type == 'Background' ? 'background' : sound.type == 'Event' ? 'event' : 'events-pack' }.png"/> ${sound.type}
+      <span class="section-title" style="margin-bottom: 4px; color: var(--primary);">
+        <img style="height: 16px; filter: var(--secondary-filter); transform: translateY(3px);" src="./medias/images/${sound.type == 'Background' ? 'background' : sound.type == 'Event' ? 'event' : 'events-pack' }.png"/> ${sound.type}
       </span>
 
       <hr>
@@ -660,29 +710,29 @@ const getSoundDetailsScreen = (sound) => {
 
       <span class="section-title">Volume</span>
       ${sound.type == 'Background' ? '' : `
-        <div class="space-between-line" style="margin-bottom: 8px;">
+        <div class="space-between-line" style="margin-bottom: 16px;">
           <span style="display: flex; justify-content: flex-start; align-items: center">
             <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px;" />
             <span>Effective volume range</span>
           </span>
-          <span id="effectiveVolumeRangeValue">75%-85%</span>
+          <span id="effectiveVolumeRangeValue" style="color: var(--secondary);">75%-85%</span>
         </div>
       `}
 
       <!-- <button class="solid">Play at max range</button> -->
 
       <div class="slider-container">
-        <div class="space-between-line"><span>${sound.type == 'Background' ? 'Volume' : 'Absolute volume'}</span><span id="absoluteVolumeValue">${slider.absolute_volume}%</span></div>
+        <div class="space-between-line"><span>${sound.type == 'Background' ? 'Volume' : 'Absolute volume'}</span><span id="absoluteVolumeValue" style="color: var(--secondary);">${slider.absolute_volume}%</span></div>
         <input type="range" id="absoluteVolumeSlider" min="0" max="100" step="1" value="${slider.absolute_volume}" class="slider" oninput="onAbsoluteVolumeSliderInput('${sound.name}')"/>
       </div>
 
       ${sound.type == 'Background' ? '' : `
         <div class="slider-container">
-          <div class="space-between-line"><span>Relative maximum volume</span><span id="relativeMaxVolumeValue">${slider.relative_max_volume}%</span></div>
+          <div class="space-between-line"><span>Relative maximum volume</span><span id="relativeMaxVolumeValue" style="color: var(--secondary);">${slider.relative_max_volume}%</span></div>
           <input type="range" id="relativeMaxVolumeSlider" min="0" max="100" step="1" value="${slider.relative_max_volume}" class="slider small" oninput="onRelativeMaxVolumeSliderInput('${sound.name}')"/>
         </div>
         <div class="slider-container">
-          <div class="space-between-line"><span>Relative minimum volume</span><span id="relativeMinVolumeValue">${slider.relative_min_volume}%</span></div>
+          <div class="space-between-line"><span>Relative minimum volume</span><span id="relativeMinVolumeValue" style="color: var(--secondary);">${slider.relative_min_volume}%</span></div>
           <input type="range" id="relativeMinVolumeSlider" min="0" max="100" step="1" value="${slider.relative_min_volume}" class="slider small" oninput="onRelativeMinVolumeSliderInput('${sound.name}')"/>
         </div>
   
@@ -692,28 +742,26 @@ const getSoundDetailsScreen = (sound) => {
 
         <span class="section-title">Playback interval</span>
 
-        <div class="space-between-line" style="margin-bottom: 8px;">
+        <div class="space-between-line" style="margin-bottom: 16px;">
           <span style="display: flex; justify-content: flex-start; align-items: center; width: 100%;">
             <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px;" />
             <span style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-              <span id="relativeMaxDelayValue">${getFullTimeStringFromMilliseconds(getRealDelay(slider.relative_max_repetition_frequency, longestDuration))}</span>
+              <span id="relativeMaxDelayValue" style="color: var(--secondary);">${getFullTimeStringFromMilliseconds(getRealDelay(slider.relative_max_repetition_frequency, longestDuration))}</span>
               <span>to</span>
-              <span id="relativeMinDelayValue">${getFullTimeStringFromMilliseconds(getRealDelay(slider.relative_min_repetition_frequency, longestDuration))}</span>
-              
+              <span id="relativeMinDelayValue" style="color: var(--secondary);">${getFullTimeStringFromMilliseconds(getRealDelay(slider.relative_min_repetition_frequency, longestDuration))}</span>
             </span>
-            
           </span>
         </div>
         <div class="slider-container">
-          <div class="space-between-line"><span>Absolute playback interval</span><span id="absoluteRepetitionFrequencyValue">${slider.absolute_repetition_frequency}%</span></div>
+          <div class="space-between-line"><span>Absolute playback interval</span><span id="absoluteRepetitionFrequencyValue" style="color: var(--secondary);">${slider.absolute_repetition_frequency}%</span></div>
           <input type="range" id="absoluteRepetitionFrequencySlider" min="0" max="100" step="1" value="${slider.absolute_repetition_frequency}" class="slider" oninput="onAbsoluteRepetitionFrequencySliderInput('${sound.name}')"/>
         </div>
         <div class="slider-container">
-          <div class="space-between-line"><span>Relative max. playback interval</span><span id="relativeMaxRepetitionFrequencyValue">${slider.relative_max_repetition_frequency}%</span></div>
+          <div class="space-between-line"><span>Relative max. playback interval</span><span id="relativeMaxRepetitionFrequencyValue" style="color: var(--secondary);">${slider.relative_max_repetition_frequency}%</span></div>
           <input type="range" id="relativeMaxRepetitionFrequencySlider" min="0" max="100" step="1" value="${slider.relative_max_repetition_frequency}" class="slider small" oninput="onRelativeMaxRepetitionFrequencySliderInput('${sound.name}')"/>
         </div>
         <div class="slider-container">
-          <div class="space-between-line"><span>Relative min. playback interval</span><span id="relativeMinRepetitionFrequencyValue">${slider.relative_min_repetition_frequency}%</span></div>
+          <div class="space-between-line"><span>Relative min. playback interval</span><span id="relativeMinRepetitionFrequencyValue" style="color: var(--secondary);">${slider.relative_min_repetition_frequency}%</span></div>
           <input type="range" id="relativeMinRepetitionFrequencySlider" min="0" max="100" step="1" value="${slider.relative_min_repetition_frequency}" class="slider small" oninput="onRelativeMinRepetitionFrequencySliderInput('${sound.name}')"/>
         </div>
 
@@ -721,17 +769,19 @@ const getSoundDetailsScreen = (sound) => {
 
         <!-- Skip -->
 
-        <div class="space-between-line" style="margin-bottom: 8px;">
+        <span class="section-title">Skip probability</span>
+
+        <div class="space-between-line" style="margin-bottom: 6px;">
           <span style="display: flex; justify-content: flex-start; align-items: center">
             <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px;" />
               <span>
-                <span id="infoSkipFrequencyValue">${100 - slider.skip_frequency}%</span> chance to be played
+                <span id="infoSkipFrequencyValue" style="color: var(--secondary);">${100 - slider.skip_frequency}%</span> chance to be played
               </span>
           </span>
         </div>
 
         <div class="slider-container">
-          <div class="space-between-line"><span>Skip probability</span><span id="skipFrequencyValue">${slider.skip_frequency}%</span></div>
+          <div class="space-between-line"><span>Probability</span><span id="skipFrequencyValue" style="color: var(--secondary);">${slider.skip_frequency}%</span></div>
           <input type="range" id="skipFrequencySlider" min="0" max="100" step="1" value="${slider.skip_frequency}" class="slider" oninput="onSkipFrequencySliderInput('${sound.name}')"/>
         </div>
 
@@ -751,7 +801,7 @@ const getSoundDetailsScreen = (sound) => {
   `;
   setTimeout(() => {
     updateVolumeEffectiveRangeIhm(slider.relative_min_volume, slider.relative_max_volume, slider.absolute_volume);
-    updateRepetitionFrequencyEffectiveRangeIhmSmall(slider.relative_min_repetition_frequency, slider.relative_max_repetition_frequency, slider.absolute_repetition_frequency);
+    updateRepetitionFrequencyEffectiveRangeIhm(slider.relative_min_repetition_frequency, slider.relative_max_repetition_frequency, slider.absolute_repetition_frequency, longestDuration);
   }, 10);
   
   return str;
@@ -808,7 +858,7 @@ const logPlaying = (src, volume, isMuted) => {
   const logger = document.getElementById('consoleContent');
   if (isMuted) {
     //console.log('Muted');
-    logger.innerHTML = `<span class="log muted"><span>mute</span><span>${src}</span><span style="min-width: 24px"></span></span>${logger.innerHTML}`;
+    //logger.innerHTML = `<span class="log muted"><span>mute</span><span>${src}</span><span style="min-width: 24px"></span></span>${logger.innerHTML}`;
   } else {
     //console.log('Not muted');
     logger.innerHTML = `<span class="log active"><span>play</span><span>${src}</span><span>${roundToDecimals(volume * 100, 0)}%</span></span>${logger.innerHTML}`;
@@ -937,7 +987,9 @@ const playEventAudio = (soundName) => {
       logPlaying(audio.src, randomVolume, slider.muted);
     } 
   } else {
-    logSkipped(audio.src);
+    if (!slider.muted) {
+      logSkipped(audio.src);
+    }
   }
 }
 
@@ -1005,7 +1057,7 @@ function createAudioPlayer(soundPack) {
       let randomFrequency = getRandomIntegerBetween(minRepetitionFrequencyAbsoluteValue, maxRepetitionFrequencyAbsoluteValue);
       let baseDelay = getRealDelay(randomFrequency, longestDuration);
 
-      /* if (soundPack.name === 'Spaceship 01') {
+      if (soundPack.name === 'Spaceship 02') {
         console.groupCollapsed(`soundpack: ${soundPack.name}`);
         console.log(`absoluteRepetitionFrequency: ${absoluteRepetitionFrequency}`);
         console.log(`absoluteDelay: ${absoluteDelay}`);
@@ -1014,14 +1066,14 @@ function createAudioPlayer(soundPack) {
         console.log(`minRepetitionFrequencyAbsoluteValue: ${minRepetitionFrequencyAbsoluteValue}`);
         console.log(`maxRepetitionFrequencyAbsoluteValue: ${maxRepetitionFrequencyAbsoluteValue}`);
         console.log(`randomFrequency: ${randomFrequency}`);
-        console.log(`baseDelay: ${baseDelay}`);
+        console.log(`baseDelay: ${getFullTimeStringFromMilliseconds(baseDelay)}`);
         console.groupEnd();
-      } */
+      }
 
       function tick() {
-        /* if (soundPack.name === 'Spaceship 01') {
+        if (soundPack.name === 'Spaceship 02') {
           console.log(`tick on ${soundPack.name}`);
-        } */
+        }
         if (soundPack.type === 'Event') {
           playEventAudio(soundPack.name);
         } else {
@@ -1032,11 +1084,13 @@ function createAudioPlayer(soundPack) {
         let relativeMaxRepetitionFrequency = slider.relative_max_repetition_frequency;
         let relativeMinRepetitionFrequency = slider.relative_min_repetition_frequency;
         //let absoluteDelay = getRealDelay(absoluteRepetitionFrequency, longestDuration);
-        let randomFrequency = getRandomIntegerBetween(relativeMinRepetitionFrequency, relativeMaxRepetitionFrequency);
+        let minRepetitionFrequencyAbsoluteValue = roundToDecimals((relativeMinRepetitionFrequency / 100) * absoluteRepetitionFrequency, 2);
+        let maxRepetitionFrequencyAbsoluteValue = roundToDecimals((relativeMaxRepetitionFrequency / 100) * absoluteRepetitionFrequency, 2);
+        let randomFrequency = getRandomIntegerBetween(minRepetitionFrequencyAbsoluteValue, maxRepetitionFrequencyAbsoluteValue);
         let finalDelay = getRealDelay(randomFrequency, longestDuration);
-        /* if (soundPack.name === 'Spaceship 01') {
+        if (soundPack.name === 'Spaceship 02') {
           console.log(`next one in ${getFullTimeStringFromMilliseconds(finalDelay)}`);
-        } */
+        }
         timer = setTimeout(tick, finalDelay);
       }
 

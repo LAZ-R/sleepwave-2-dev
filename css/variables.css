@@ -23,7 +23,15 @@
 
   --nostromo-aqua:     hsl(160, 100%, 50%);
   --nostromo-aqua-alpha: hsl(160, 100%, 50%, .33);
-  --nostromo-aqua-filter: brightness(0) saturate(100%) invert(69%) sepia(94%) saturate(680%) hue-rotate(97deg) brightness(105%) contrast(103%);
+  --nostromo-aqua-filter: brightness(0) saturate(100%) invert(77%) sepia(9%) saturate(6030%) hue-rotate(102deg) brightness(105%) contrast(101%);
+
+  --nostromo-purple:     hsl(276, 42%, 63%);
+  --nostromo-purple-alpha: hsl(276, 42%, 63%, .33);
+  --nostromo-purple-filter: brightness(0) saturate(100%) invert(70%) sepia(42%) saturate(7364%) hue-rotate(244deg) brightness(99%) contrast(104%);
+
+  --nostromo-teal:     hsl(140, 80%, 60%);
+  --nostromo-teal-alpha: hsl(140, 80%, 60%, .33);
+  --nostromo-teal-filter: brightness(0) saturate(100%) invert(70%) sepia(96%) saturate(345%) hue-rotate(78deg) brightness(98%) contrast(88%);
 
   --nostromo-pink:     hsl(290, 100%, 70%);
   --nostromo-pink-alpha: hsl(290, 100%, 70%, .33);
@@ -36,6 +44,10 @@
   --nostromo-white:     hsl(0, 100%, 100%);
   --nostromo-white-alpha: hsl(0, 100%, 100%, .33);
   --nostromo-white-filter: brightness(1) saturate(0%);
+
+  --nostromo-green-2:     hsl(86, 63%, 60%);
+  --nostromo-green-2-alpha: hsl(86, 63%, 60%, .33);
+  --nostromo-green-2-filter: brightness(0) saturate(100%) invert(84%) sepia(79%) saturate(376%) hue-rotate(26deg) brightness(91%) contrast(87%);
 
   --primary: var(--nostromo-green);
   --primary-alpha: var(--nostromo-green-alpha);

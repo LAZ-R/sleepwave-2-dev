@@ -1,4 +1,4 @@
-# SLEEPWAVE 2 (dev v0.0.8)
+# SLEEPWAVE 2 (dev v0.0.9)
 
 **[Virtual soundscape generator](https://laz-r.github.io/sleepwave-2-dev/)**
 
@@ -24,4 +24,5 @@ Just like the `Event` type, but with **multiple** samples randomly chosen to be 
 
 ---
 
-This is mostly a *proof of concept* so the code here is awfull, I know.
+This is mostly a *proof of concept* so the code here is awfull, I know.  
+But I'm in love with my UI.
