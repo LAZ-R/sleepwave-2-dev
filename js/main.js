@@ -430,26 +430,26 @@ const setSettingsPage = () => {
   element.innerHTML = `
     <div class="setting-bloc">
       <spa style="color: var(--secondary);">theme</span>
-      <div class="color-buttons-container"">
-        <button id="rainbow" class="setting-color-bloc rainbow ${getTheme() == 'rainbow' ? 'selected' : ''}" onclick="onColorBlocClick('rainbow')"></button>
-      </div>
       <div class="color-buttons-container" style="margin-top: 16px;"">
-        <!-- <button id="green" class="setting-color-bloc green ${getTheme() == 'green' ? 'selected' : ''}" onclick="onColorBlocClick('green')"></button> -->
-        <button id="teal" class="setting-color-bloc teal ${getTheme() == 'teal' ? 'selected' : ''}" onclick="onColorBlocClick('teal')"></button>
-        <!-- <button id="aqua" class="setting-color-bloc aqua ${getTheme() == 'aqua' ? 'selected' : ''}" onclick="onColorBlocClick('aqua')"></button> -->
-        <button id="blue" class="setting-color-bloc blue ${getTheme() == 'blue' ? 'selected' : ''}" onclick="onColorBlocClick('blue')"></button>
-        <!-- <button id="purple" class="setting-color-bloc purple ${getTheme() == 'purple' ? 'selected' : ''}" onclick="onColorBlocClick('purple')"></button> -->
-        <button id="pink" class="setting-color-bloc pink ${getTheme() == 'pink' ? 'selected' : ''}" onclick="onColorBlocClick('pink')"></button>
-        <button id="orange" class="setting-color-bloc orange ${getTheme() == 'orange' ? 'selected' : ''}" onclick="onColorBlocClick('orange')"></button>
-        <button id="yellow" class="setting-color-bloc yellow ${getTheme() == 'yellow' ? 'selected' : ''}" onclick="onColorBlocClick('yellow')"></button>
-        <button id="white" class="setting-color-bloc white ${getTheme() == 'white' ? 'selected' : ''}" onclick="onColorBlocClick('white')"></button>
+      <!-- <button id="green" class="setting-color-bloc green ${getTheme() == 'green' ? 'selected' : ''}" onclick="onColorBlocClick('green')"></button> -->
+      <button id="teal" class="setting-color-bloc teal ${getTheme() == 'teal' ? 'selected' : ''}" onclick="onColorBlocClick('teal')"></button>
+      <!-- <button id="aqua" class="setting-color-bloc aqua ${getTheme() == 'aqua' ? 'selected' : ''}" onclick="onColorBlocClick('aqua')"></button> -->
+      <button id="blue" class="setting-color-bloc blue ${getTheme() == 'blue' ? 'selected' : ''}" onclick="onColorBlocClick('blue')"></button>
+      <!-- <button id="purple" class="setting-color-bloc purple ${getTheme() == 'purple' ? 'selected' : ''}" onclick="onColorBlocClick('purple')"></button> -->
+      <button id="pink" class="setting-color-bloc pink ${getTheme() == 'pink' ? 'selected' : ''}" onclick="onColorBlocClick('pink')"></button>
+      <button id="orange" class="setting-color-bloc orange ${getTheme() == 'orange' ? 'selected' : ''}" onclick="onColorBlocClick('orange')"></button>
+      <button id="yellow" class="setting-color-bloc yellow ${getTheme() == 'yellow' ? 'selected' : ''}" onclick="onColorBlocClick('yellow')"></button>
+      <button id="white" class="setting-color-bloc white ${getTheme() == 'white' ? 'selected' : ''}" onclick="onColorBlocClick('white')"></button>
       </div>
       <div class="color-buttons-container" style="margin-top: 16px;">
-        <button id="nostromo-2" class="setting-color-bloc nostromo-2 ${getTheme() == 'nostromo-2' ? 'selected' : ''}" onclick="onColorBlocClick('nostromo-2')"></button>
-        <button id="nostromo" class="setting-color-bloc nostromo ${getTheme() == 'nostromo' ? 'selected' : ''}" onclick="onColorBlocClick('nostromo')"></button>
-        <button id="nge" class="setting-color-bloc nge ${getTheme() == 'nge' ? 'selected' : ''}" onclick="onColorBlocClick('nge')"></button>
-        <button id="h3oplus" class="setting-color-bloc h3oplus ${getTheme() == 'h3oplus' ? 'selected' : ''}" onclick="onColorBlocClick('h3oplus')"></button>
-        <!-- <button id="hulk" class="setting-color-bloc hulk ${getTheme() == 'hulk' ? 'selected' : ''}" onclick="onColorBlocClick('hulk')"></button> -->
+      <button id="nostromo-og" class="setting-color-bloc nostromo-og ${getTheme() == 'nostromo-og' ? 'selected' : ''}" onclick="onColorBlocClick('nostromo-og')"></button>
+      <button id="nostromo-alt" class="setting-color-bloc nostromo-alt ${getTheme() == 'nostromo-alt' ? 'selected' : ''}" onclick="onColorBlocClick('nostromo-alt')"></button>
+      <button id="nge" class="setting-color-bloc nge ${getTheme() == 'nge' ? 'selected' : ''}" onclick="onColorBlocClick('nge')"></button>
+      <button id="h3oplus" class="setting-color-bloc h3oplus ${getTheme() == 'h3oplus' ? 'selected' : ''}" onclick="onColorBlocClick('h3oplus')"></button>
+      <!-- <button id="hulk" class="setting-color-bloc hulk ${getTheme() == 'hulk' ? 'selected' : ''}" onclick="onColorBlocClick('hulk')"></button> -->
+      </div>
+      <div class="color-buttons-container"">
+        <button id="rainbow" class="setting-color-bloc rainbow ${getTheme() == 'rainbow' ? 'selected' : ''}" onclick="onColorBlocClick('rainbow')"></button>
       </div>
     </div>
   <hr>
@@ -473,22 +473,31 @@ const setIhmTheme = () => {
   }
 
   switch (value) {
-    case 'green':
+    // MONO COLOR ---------------------------------------------------------------------------------
+    /* case 'green':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-green)`);
       document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-green-alpha)`);
       document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-green-filter)`);
       document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-green)`);
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-green-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-green-filter)`);
+      break; */
+    case 'teal':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-teal)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-teal-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-teal-filter)`);
+      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-teal)`);
+      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-teal-alpha)`);
+      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-teal-filter)`);
       break;
-    case 'orange':
-      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-orange)`);
-      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-orange-alpha)`);
-      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-orange-filter)`);
-      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-orange)`);
-      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-orange-alpha)`);
-      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-orange-filter)`);
-      break;
+    /* case 'aqua':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-aqua)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-aqua-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-aqua-filter)`);
+      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-aqua)`);
+      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-aqua-alpha)`);
+      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-aqua-filter)`);
+      break; */
     case 'blue':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-blue)`);
       document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-blue-alpha)`);
@@ -497,22 +506,14 @@ const setIhmTheme = () => {
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-blue-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-blue-filter)`);
       break;
-    case 'purple':
+    /* case 'purple':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-purple)`);
       document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-purple-alpha)`);
       document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-purple-filter)`);
       document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-purple)`);
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-purple-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-purple-filter)`);
-      break;
-    case 'aqua':
-      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-aqua)`);
-      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-aqua-alpha)`);
-      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-aqua-filter)`);
-      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-aqua)`);
-      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-aqua-alpha)`);
-      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-aqua-filter)`);
-      break;
+      break; */
     case 'pink':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-pink)`);
       document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-pink-alpha)`);
@@ -521,13 +522,13 @@ const setIhmTheme = () => {
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-pink-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-pink-filter)`);
       break;
-    case 'teal':
-      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-teal)`);
-      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-teal-alpha)`);
-      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-teal-filter)`);
-      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-teal)`);
-      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-teal-alpha)`);
-      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-teal-filter)`);
+    case 'orange':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-orange)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-orange-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-orange-filter)`);
+      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-orange)`);
+      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-orange-alpha)`);
+      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-orange-filter)`);
       break;
     case 'yellow':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-yellow)`);
@@ -545,7 +546,16 @@ const setIhmTheme = () => {
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-white-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-white-filter)`);
       break;
-    case 'nostromo':
+    // BI COLOR -----------------------------------------------------------------------------------
+    case 'nostromo-og':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-orange)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-orange-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-orange-filter)`);
+      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-yellow)`);
+      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-yellow-alpha)`);
+      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-yellow-filter)`);
+      break;
+    case 'nostromo-alt':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-teal)`);
       document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-teal-alpha)`);
       document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-teal-filter)`);
@@ -561,22 +571,6 @@ const setIhmTheme = () => {
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-green-2-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-green-2-filter)`);
       break;
-    case 'nostromo-2':
-      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-orange)`);
-      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-orange-alpha)`);
-      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-orange-filter)`);
-      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-yellow)`);
-      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-yellow-alpha)`);
-      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-yellow-filter)`);
-      break;
-    case 'rainbow':
-      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-teal)`);
-      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-teal-alpha)`);
-      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-teal-filter)`);
-      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-white)`);
-      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-orange-alpha)`);
-      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-orange-filter)`);
-      break;
     case 'h3oplus':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-aqua)`);
       document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-aqua-alpha)`);
@@ -585,13 +579,22 @@ const setIhmTheme = () => {
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-orange-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-orange-filter)`);
       break;
-    case 'hulk':
+    /* case 'hulk':
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-green)`);
       document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-green-alpha)`);
       document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-green-filter)`);
       document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-pink)`);
       document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-pink-alpha)`);
       document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-pink-filter)`);
+      break; */
+    // TRI COLOR ----------------------------------------------------------------------------------
+    case 'rainbow':
+      document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-teal)`);
+      document.querySelector(':root').style.setProperty('--primary-alpha', `var(--nostromo-teal-alpha)`);
+      document.querySelector(':root').style.setProperty('--primary-filter', `var(--nostromo-teal-filter)`);
+      document.querySelector(':root').style.setProperty('--secondary', `var(--nostromo-white)`);
+      document.querySelector(':root').style.setProperty('--secondary-alpha', `var(--nostromo-orange-alpha)`);
+      document.querySelector(':root').style.setProperty('--secondary-filter', `var(--nostromo-orange-filter)`);
       break;
     default:
       document.querySelector(':root').style.setProperty('--primary', `var(--nostromo-pink)`);
@@ -712,7 +715,7 @@ const getSoundDetailsScreen = (sound) => {
       ${sound.type == 'Background' ? '' : `
         <div class="space-between-line" style="margin-bottom: 16px;">
           <span style="display: flex; justify-content: flex-start; align-items: center">
-            <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px;" />
+            <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px; transform: translateY(-1px);" />
             <span>Effective volume range</span>
           </span>
           <span id="effectiveVolumeRangeValue" style="color: var(--secondary);">75%-85%</span>
@@ -744,7 +747,7 @@ const getSoundDetailsScreen = (sound) => {
 
         <div class="space-between-line" style="margin-bottom: 16px;">
           <span style="display: flex; justify-content: flex-start; align-items: center; width: 100%;">
-            <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px;" />
+            <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px; transform: translateY(-1px);" />
             <span style="display: flex; justify-content: center; align-items: center; width: 100%; gap: 16px;">
               <span id="relativeMaxDelayValue" style="color: var(--secondary);">${getFullTimeStringFromMilliseconds(getRealDelay(slider.relative_max_repetition_frequency, longestDuration))}</span>
               <span>to</span>
@@ -773,7 +776,7 @@ const getSoundDetailsScreen = (sound) => {
 
         <div class="space-between-line" style="margin-bottom: 16px;">
           <span style="display: flex; justify-content: flex-start; align-items: center">
-            <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px;" />
+            <img src="./medias/images/info.png" style="filter: var(--secondary-filter); height: 16px; margin-right: 8px; transform: translateY(-1px);" />
               <span>
                 <span id="infoSkipFrequencyValue" style="color: var(--secondary);">${100 - slider.skip_frequency}%</span> chance to be played
               </span>

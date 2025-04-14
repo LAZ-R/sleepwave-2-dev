@@ -614,7 +614,7 @@ html, body {
             background-color: var(--nostromo-white);
           }
 
-          &.nostromo {
+          &.nostromo-alt {
             background: linear-gradient(
               135deg, 
               var(--nostromo-teal) 0%, 
@@ -624,7 +624,7 @@ html, body {
             );
           }
           
-          &.nostromo-2 {
+          &.nostromo-og {
             background: linear-gradient(
               135deg, 
               var(--nostromo-orange) 0%, 

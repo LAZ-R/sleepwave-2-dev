@@ -10,7 +10,7 @@ export const setStorage = () => {
     
     let userTMP = {
       parameters:  [
-        { id: 'theme', value: 'rainbow' },
+        { id: 'theme', value: 'teal' },
         { id: 'expanded', value: true },
       ],
       sliders: [],
@@ -56,7 +56,7 @@ export const getTheme = () => {
       return parameter.value;
     }
   }
-  return 'rainbow';
+  return 'teal';
 }
 
 export const setTheme = (value) => {

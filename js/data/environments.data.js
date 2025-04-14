@@ -98,39 +98,39 @@ export const ENVIRONMENTS = [
             audio_files_pack: [
               {
                 src: 'jpn-police-01-a.mp3',
-                duration: 17000,
+                duration: 17500,
               },
               {
                 src: 'jpn-police-01-b.mp3',
-                duration: 17000,
+                duration: 17500,
               },
               {
                 src: 'jpn-police-01-c.mp3',
-                duration: 17000,
+                duration: 17500,
               },
               {
                 src: 'jpn-police-02-a.mp3',
-                duration: 10000,
+                duration: 10500,
               },
               {
                 src: 'jpn-police-02-b.mp3',
-                duration: 10000,
+                duration: 10500,
               },
               {
                 src: 'jpn-police-02-c.mp3',
-                duration: 10000,
+                duration: 10500,
               },
               {
                 src: 'jpn-police-03-a.mp3',
-                duration: 14000,
+                duration: 14500,
               },
               {
                 src: 'jpn-police-03-b.mp3',
-                duration: 14000,
+                duration: 14500,
               },
               {
                 src: 'jpn-police-03-c.mp3',
-                duration: 14000,
+                duration: 14500,
               },
             ],
           },
@@ -170,15 +170,15 @@ export const ENVIRONMENTS = [
             audio_files_pack: [
               {
                 src: 'aircraft-01-a.mp3',
-                duration: 7000,
+                duration: 7500,
               },
               {
                 src: 'aircraft-01-b.mp3',
-                duration: 7000,
+                duration: 7500,
               },
               {
                 src: 'aircraft-01-c.mp3',
-                duration: 7000,
+                duration: 7500,
               },
             ],
           },
@@ -188,15 +188,15 @@ export const ENVIRONMENTS = [
             audio_files_pack: [
               {
                 src: 'aircraft-02-a.mp3',
-                duration: 7000,
+                duration: 7500,
               },
               {
                 src: 'aircraft-02-b.mp3',
-                duration: 7000,
+                duration: 7500,
               },
               {
                 src: 'aircraft-02-c.mp3',
-                duration: 7000,
+                duration: 7500,
               },
             ],
           },
@@ -206,15 +206,15 @@ export const ENVIRONMENTS = [
             audio_files_pack: [
               {
                 src: 'aircraft-03-a.mp3',
-                duration: 7000,
+                duration: 7500,
               },
               {
                 src: 'aircraft-03-b.mp3',
-                duration: 7000,
+                duration: 7500,
               },
               {
                 src: 'aircraft-03-c.mp3',
-                duration: 7000,
+                duration: 7500,
               },
             ],
           },
@@ -224,15 +224,15 @@ export const ENVIRONMENTS = [
             audio_files_pack: [
               {
                 src: 'aircraft-04-a.mp3',
-                duration: 7000,
+                duration: 7500,
               },
               {
                 src: 'aircraft-04-b.mp3',
-                duration: 7000,
+                duration: 7500,
               },
               {
                 src: 'aircraft-04-c.mp3',
-                duration: 7000,
+                duration: 7500,
               },
             ],
           },
@@ -242,15 +242,15 @@ export const ENVIRONMENTS = [
             audio_files_pack: [
               {
                 src: 'aircraft-05-a.mp3',
-                duration: 11000,
+                duration: 11500,
               },
               {
                 src: 'aircraft-05-b.mp3',
-                duration: 11000,
+                duration: 11500,
               },
               {
                 src: 'aircraft-05-c.mp3',
-                duration: 11000,
+                duration: 11500,
               },
             ],
           },
@@ -260,39 +260,39 @@ export const ENVIRONMENTS = [
             audio_files_pack: [
               {
                 src: 'pod-s-01-a.mp3',
-                duration: 5000,
+                duration: 6000,
               },
               {
                 src: 'pod-s-01-b.mp3',
-                duration: 5000,
+                duration: 6000,
               },
               {
                 src: 'pod-s-01-c.mp3',
-                duration: 5000,
+                duration: 6000,
               },
               {
                 src: 'pod-s-02-a.mp3',
-                duration: 5000,
+                duration: 6000,
               },
               {
                 src: 'pod-s-02-b.mp3',
-                duration: 5000,
+                duration: 6000,
               },
               {
                 src: 'pod-s-02-c.mp3',
-                duration: 5000,
+                duration: 6000,
               },
               {
                 src: 'pod-s-03-a.mp3',
-                duration: 5000,
+                duration: 6000,
               },
               {
                 src: 'pod-s-03-b.mp3',
-                duration: 5000,
+                duration: 6000,
               },
               {
                 src: 'pod-s-03-c.mp3',
-                duration: 5000,
+                duration: 6000,
               },
             ],
           },

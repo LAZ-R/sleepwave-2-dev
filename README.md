@@ -1,4 +1,4 @@
-# SLEEPWAVE 2 (dev v0.0.11)
+# SLEEPWAVE 2 (dev v0.0.12)
 
 **[Virtual soundscape generator](https://laz-r.github.io/sleepwave-2-dev/)**
 
@@ -30,6 +30,12 @@ But I'm in love with my UI and the concept of this, so *I don't care*.
 ---
 
 ## Changelog
+
+### v 0.0.12
+14-04-2025
+  - Default theme change
+  - AppIcon & favicon fix
+  - Duration fix on data
 
 ### v 0.0.11
 14-04-2025
