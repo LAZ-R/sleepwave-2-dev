@@ -97,31 +97,51 @@ export const ENVIRONMENTS = [
             type: 'Events pack',
             audio_files_pack: [
               {
-                src: 'police-01.mp3',
-                duration: 21000,
+                src: 'jpn-police-01-a.mp3',
+                duration: 17000,
               },
               {
-                src: 'police-02.mp3',
-                duration: 15000,
+                src: 'jpn-police-01-b.mp3',
+                duration: 17000,
               },
               {
-                src: 'police-03.mp3',
-                duration: 21000,
+                src: 'jpn-police-01-c.mp3',
+                duration: 17000,
               },
               {
-                src: 'police-03.mp3',
-                duration: 23000,
+                src: 'jpn-police-02-a.mp3',
+                duration: 10000,
+              },
+              {
+                src: 'jpn-police-02-b.mp3',
+                duration: 10000,
+              },
+              {
+                src: 'jpn-police-02-c.mp3',
+                duration: 10000,
+              },
+              {
+                src: 'jpn-police-03-a.mp3',
+                duration: 14000,
+              },
+              {
+                src: 'jpn-police-03-b.mp3',
+                duration: 14000,
+              },
+              {
+                src: 'jpn-police-03-c.mp3',
+                duration: 14000,
               },
             ],
           },
-          {
+          /* {
             name: 'Police alert',
             type: 'Event',
             audio_file: {
               src: 'police-alert.mp3',
               duration: 6000,
             },
-          },
+          }, */
           {
             name: 'Distant crowd',
             type: 'Background',
@@ -137,52 +157,144 @@ export const ENVIRONMENTS = [
         name: 'Vehicles',
         sounds: [
           {
-            name: 'Huge spaceship',
+            name: 'Overseeker',
             type: 'Event',
             audio_file:{
-              src: 'huge-spaceship.mp3',
+              src: 'overseeker.mp3',
               duration: 34500,
             },
           },
           {
-            name: 'Spaceship 01',
-            type: 'Event',
-            audio_file:{
-              src: 'spaceship-01.mp3',
-              duration: 13000,
-            },
+            name: 'Aircraft 01',
+            type: 'Events pack',
+            audio_files_pack: [
+              {
+                src: 'aircraft-01-a.mp3',
+                duration: 7000,
+              },
+              {
+                src: 'aircraft-01-b.mp3',
+                duration: 7000,
+              },
+              {
+                src: 'aircraft-01-c.mp3',
+                duration: 7000,
+              },
+            ],
           },
           {
-            name: 'Spaceship 02',
-            type: 'Event',
-            audio_file:{
-              src: 'spaceship-02.mp3',
-              duration: 14000,
-            },
+            name: 'Aircraft 02',
+            type: 'Events pack',
+            audio_files_pack: [
+              {
+                src: 'aircraft-02-a.mp3',
+                duration: 7000,
+              },
+              {
+                src: 'aircraft-02-b.mp3',
+                duration: 7000,
+              },
+              {
+                src: 'aircraft-02-c.mp3',
+                duration: 7000,
+              },
+            ],
           },
           {
-            name: 'Spaceship 03',
-            type: 'Event',
-            audio_file:{
-              src: 'spaceship-03.mp3',
-              duration: 14000,
-            },
+            name: 'Aircraft 03',
+            type: 'Events pack',
+            audio_files_pack: [
+              {
+                src: 'aircraft-03-a.mp3',
+                duration: 7000,
+              },
+              {
+                src: 'aircraft-03-b.mp3',
+                duration: 7000,
+              },
+              {
+                src: 'aircraft-03-c.mp3',
+                duration: 7000,
+              },
+            ],
           },
           {
-            name: 'Spaceship 04',
-            type: 'Event',
-            audio_file:{
-              src: 'spaceship-04.mp3',
-              duration: 14000,
-            },
+            name: 'Aircraft 04',
+            type: 'Events pack',
+            audio_files_pack: [
+              {
+                src: 'aircraft-04-a.mp3',
+                duration: 7000,
+              },
+              {
+                src: 'aircraft-04-b.mp3',
+                duration: 7000,
+              },
+              {
+                src: 'aircraft-04-c.mp3',
+                duration: 7000,
+              },
+            ],
           },
           {
-            name: 'Spaceship 05',
-            type: 'Event',
-            audio_file:{
-              src: 'spaceship-05.mp3',
-              duration: 15000,
-            },
+            name: 'Aircraft 05',
+            type: 'Events pack',
+            audio_files_pack: [
+              {
+                src: 'aircraft-05-a.mp3',
+                duration: 11000,
+              },
+              {
+                src: 'aircraft-05-b.mp3',
+                duration: 11000,
+              },
+              {
+                src: 'aircraft-05-c.mp3',
+                duration: 11000,
+              },
+            ],
+          },
+          {
+            name: 'Podracer',
+            type: 'Events pack',
+            audio_files_pack: [
+              {
+                src: 'pod-s-01-a.mp3',
+                duration: 5000,
+              },
+              {
+                src: 'pod-s-01-b.mp3',
+                duration: 5000,
+              },
+              {
+                src: 'pod-s-01-c.mp3',
+                duration: 5000,
+              },
+              {
+                src: 'pod-s-02-a.mp3',
+                duration: 5000,
+              },
+              {
+                src: 'pod-s-02-b.mp3',
+                duration: 5000,
+              },
+              {
+                src: 'pod-s-02-c.mp3',
+                duration: 5000,
+              },
+              {
+                src: 'pod-s-03-a.mp3',
+                duration: 5000,
+              },
+              {
+                src: 'pod-s-03-b.mp3',
+                duration: 5000,
+              },
+              {
+                src: 'pod-s-03-c.mp3',
+                duration: 5000,
+              },
+            ],
           },
         ],
       },
