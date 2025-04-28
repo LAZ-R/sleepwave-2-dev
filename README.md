@@ -1,4 +1,4 @@
-# SLEEPWAVE 2 (dev v0.0.12)
+# SLEEPWAVE 2 (dev v0.0.13)
 
 **[Virtual soundscape generator](https://laz-r.github.io/sleepwave-2-dev/)**
 
@@ -30,6 +30,10 @@ But I'm in love with my UI and the concept of this, so *I don't care*.
 ---
 
 ## Changelog
+
+### v 0.0.13
+28-04-2025
+  - `police` + `spaceships` + `podracer` sound reverb rework
 
 ### v 0.0.12
 14-04-2025

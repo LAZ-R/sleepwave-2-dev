@@ -98,27 +98,19 @@ export const ENVIRONMENTS = [
             audio_files_pack: [
               {
                 src: 'jpn-police-01-a.mp3',
-                duration: 17500,
+                duration: 12500,
               },
               {
                 src: 'jpn-police-01-b.mp3',
                 duration: 17500,
               },
               {
-                src: 'jpn-police-01-c.mp3',
-                duration: 17500,
-              },
-              {
                 src: 'jpn-police-02-a.mp3',
-                duration: 10500,
+                duration: 14500,
               },
               {
                 src: 'jpn-police-02-b.mp3',
-                duration: 10500,
-              },
-              {
-                src: 'jpn-police-02-c.mp3',
-                duration: 10500,
+                duration: 18500,
               },
               {
                 src: 'jpn-police-03-a.mp3',
@@ -126,11 +118,7 @@ export const ENVIRONMENTS = [
               },
               {
                 src: 'jpn-police-03-b.mp3',
-                duration: 14500,
-              },
-              {
-                src: 'jpn-police-03-c.mp3',
-                duration: 14500,
+                duration: 18500,
               },
             ],
           },
@@ -242,11 +230,11 @@ export const ENVIRONMENTS = [
             audio_files_pack: [
               {
                 src: 'aircraft-05-a.mp3',
-                duration: 11500,
+                duration: 9500,
               },
               {
                 src: 'aircraft-05-b.mp3',
-                duration: 11500,
+                duration: 9500,
               },
               {
                 src: 'aircraft-05-c.mp3',
@@ -259,40 +247,52 @@ export const ENVIRONMENTS = [
             type: 'Events pack',
             audio_files_pack: [
               {
+                src: 'pod-a-01-a.mp3',
+                duration: 5500,
+              },
+              {
+                src: 'pod-a-01-b.mp3',
+                duration: 5500,
+              },
+              {
+                src: 'pod-a-01-c.mp3',
+                duration: 6500,
+              },
+              {
                 src: 'pod-s-01-a.mp3',
-                duration: 6000,
+                duration: 5500,
               },
               {
                 src: 'pod-s-01-b.mp3',
-                duration: 6000,
+                duration: 5500,
               },
               {
                 src: 'pod-s-01-c.mp3',
-                duration: 6000,
+                duration: 6500,
               },
               {
                 src: 'pod-s-02-a.mp3',
-                duration: 6000,
+                duration: 6500,
               },
               {
                 src: 'pod-s-02-b.mp3',
-                duration: 6000,
+                duration: 6500,
               },
               {
                 src: 'pod-s-02-c.mp3',
-                duration: 6000,
+                duration: 6500,
               },
               {
                 src: 'pod-s-03-a.mp3',
-                duration: 6000,
+                duration: 5500,
               },
               {
                 src: 'pod-s-03-b.mp3',
-                duration: 6000,
+                duration: 5500,
               },
               {
                 src: 'pod-s-03-c.mp3',
-                duration: 6000,
+                duration: 6500,
               },
             ],
           },
